@@ -1,0 +1,27 @@
+<resources>
+    <string name="generalTextRegister">Введённый вами номер телефона будет использован для дальнейшего входа</string>
+    <string name="textNextStageRegister">Продолжить</string>
+    <string name="infoWindowRegister">Авторизация</string>
+    <string name="infoEditTextUserPhone">Номер телефона</string>
+    <string name="primaryCountryCode">+7</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="infoBtnConfirmCode">Войти</string>
+    <string name="infoTextConfirmAuth">Подтверждение</string>
+    <string name="infoTextConfirmAction">Требуются дополнительные данные для входа в аккаунт</string>
+    <string name="textBtnResetConfirmCode"><u>Забыли пароль?</u></string>
+    <string name="textPasswordEditTextInfo">Введите пароль</string>
+    <string name="textRegisterLayout">Регистрация</string>
+    <string name="infoOutputRegister">Для продолжения необходимо заполнить все данные</string>
+    <string name="textHintTypeAccountRegister">Тип аккаунта</string>
+    <string name="btnTextRegisterChangeStage">Далее</string>
+    <string name="passwordInfoRegister">Пароль</string>
+    <string name="organizationInfoRegister">Организация</string>
+    <string name="jobTitleInfoRegister">Должность</string>
+    <string name="nameInfoRegister">Ф.И.О</string>
+    <string name="infoTextLoadingDialog">Загрузка</string>
+    <string name="toastErrorCheckLogin">Ошибка - введён некорректный номер телефона</string>
+    <string name="toastErrorCommonCheckData">Ошибка - введены некорректные данные</string>
+    <string name="toastErrorPassword">Ошибка - введён неверный пароль от аккаунта</string>
+    <string name="infoPopupMenuRole0">Сотрудник</string>
+    <string name="infoPopupMenuRole1">Работодатель</string>
+</resources>

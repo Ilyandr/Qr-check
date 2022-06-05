@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Authorization.UI.AuthorizationFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:gravity="center|bottom"
+        android:text="@string/infoTextConfirmAuth"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/bandera_small_font"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:text="@string/infoTextConfirmAction"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorGray"
+        android:gravity="center|top"
+        android:paddingTop="8sp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
+        android:fontFamily="@font/bandera_middle_font"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputPassword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingStart="12sp"
+        android:layout_margin="12sp"
+        android:hint="@string/textPasswordEditTextInfo"
+        android:textSize="16sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:maxLength="40"
+        android:maxLines="1"
+        android:background="@drawable/edit_text_form"
+        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:background="@color/colorTransparent"
+        android:hint="@string/textBtnResetConfirmCode"
+        android:textColorHint="@color/colorGray"
+        android:gravity="center|top"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNextStage"
+        android:layout_width="match_parent"
+        android:layout_margin="12sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:textColorHint="@color/colorWhite"
+        android:hint="@string/infoBtnConfirmCode"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        android:background="@drawable/general_complete_btn_form"
+        android:layout_weight="1"/>
+</LinearLayout>

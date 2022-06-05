@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authorization_navigation"
+    app:startDestination="@id/authorizationFragment">
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="gcu.production.qrcheck.android.Authorization.UI.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/actionLaunchGeneralAppFragment"
+            app:destination="@id/generalAppFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="gcu.production.qrcheck.android.Authorization.UI.ConfirmationFragment"
+        android:label="ConfirmationFragment" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/actionLaunchGeneralAppFragment"
+            app:destination="@id/generalAppFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment"
+        android:label="fragment_authorization"
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/actionLaunchConfirmationFragment"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/actionLaunchRegistrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generalAppFragment"
+        android:name="gcu.production.qrcheck.android.Main.GeneralAppFragment"
+        android:label="fragment_general_app"
+        tools:layout="@layout/fragment_general_app" />
+</navigation>

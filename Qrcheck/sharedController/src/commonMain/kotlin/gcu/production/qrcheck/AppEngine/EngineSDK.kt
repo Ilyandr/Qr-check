@@ -1,11 +1,9 @@
 package gcu.production.qrcheck.AppEngine
 
-import gcu.production.qrcheck.AppConfiguration.Configuration
-import gcu.production.qrcheck.AppConfiguration.configurationModule
-import gcu.production.qrcheck.AppCore.KtorSettings.ktorModule
-import gcu.production.qrcheck.AppCore.coreModule
-import gcu.production.qrcheck.Features.RestInteraction.restModule
-import gcu.production.qrcheck.Features.featuresModule
+import gcu.production.qrcheck.RestAPI.AppConfiguration.Configuration
+import gcu.production.qrcheck.RestAPI.AppConfiguration.configurationModule
+import gcu.production.qrcheck.RestAPI.AppCore.coreModule
+import gcu.production.qrcheck.RestAPI.Features.featuresModule
 import org.kodein.di.*
 import kotlin.native.concurrent.ThreadLocal
 

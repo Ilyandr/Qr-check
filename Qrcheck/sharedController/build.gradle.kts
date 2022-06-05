@@ -48,7 +48,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.6.0")
+                implementation("com.google.android.material:material:1.6.1")
                 api("io.ktor:ktor-client-okhttp:${ktorVersion}")
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
                 api("com.squareup.sqldelight:android-driver:${sqlDelightVersion}")

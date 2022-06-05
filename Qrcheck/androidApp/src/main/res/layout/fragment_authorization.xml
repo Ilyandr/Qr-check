@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Authorization.UI.AuthorizationFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:gravity="center|bottom"
+        android:text="@string/infoWindowRegister"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/bandera_small_font"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:text="@string/generalTextRegister"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorGray"
+        android:gravity="center|top"
+        android:paddingTop="8sp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
+        android:fontFamily="@font/bandera_middle_font"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="12sp"
+        android:layout_marginStart="12sp"
+        android:background="@drawable/edit_text_form"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectCodeCountry"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:gravity="center|end"
+            android:fontFamily="@font/bandera_small_font"
+            android:textColor="@color/colorBlack"
+            android:text="@string/primaryCountryCode"
+            android:background="@color/colorTransparent"
+            tools:ignore="NestedWeights" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12sp"
+            android:background="@color/colorGrayAdditional"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/registerLogin"
+            android:hint="@string/infoEditTextUserPhone"
+            android:textSize="16sp"
+            android:layout_weight="10"
+            android:inputType="number"
+            android:fontFamily="@font/bandera_small_font"
+            android:background="@color/colorTransparent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9.2"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNextStage"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/bandera_small_font"
+        android:textColorHint="@color/colorWhite"
+        android:hint="@string/textNextStageRegister"
+        android:layout_height="0dp"
+        android:layout_marginStart="12sp"
+        android:layout_marginEnd="12sp"
+        android:textSize="16sp"
+        android:background="@drawable/general_complete_btn_form"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"/>
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/fragmentRegistration"
+    tools:context=".BasicActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:gravity="center|bottom"
+        android:text="@string/textRegisterLayout"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/bandera_small_font"
+        android:layout_weight="1"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:text="@string/infoOutputRegister"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorGray"
+        android:gravity="center|top"
+        android:paddingTop="8sp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
+        android:fontFamily="@font/bandera_middle_font"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="12sp"
+        android:layout_marginStart="12sp"
+        android:background="@drawable/edit_text_form"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/registerRoleInfo"
+            android:hint="@string/textHintTypeAccountRegister"
+            android:textSize="16sp"
+            android:clickable="false"
+            android:gravity="center|left"
+            android:paddingStart="12sp"
+            android:textColor="@color/colorGray"
+            android:layout_weight="2"
+            android:inputType="number"
+            android:fontFamily="@font/bandera_small_font"
+            android:background="@color/colorTransparent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:layout_marginBottom="12sp"
+            android:background="@color/colorGrayAdditional"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnSelectRole"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="6sp"
+            android:src="@drawable/expand_more_24"
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorTransparent"
+            tools:ignore="NestedWeights" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputName"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingStart="12sp"
+        android:layout_marginTop="6sp"
+        android:layout_marginEnd="12sp"
+        android:layout_marginStart="12sp"
+        android:hint="@string/nameInfoRegister"
+        android:textSize="16sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:maxLength="80"
+        android:maxLines="1"
+        android:background="@drawable/edit_text_form"
+        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputJobTitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingStart="12sp"
+        android:layout_marginEnd="12sp"
+        android:layout_marginTop="6sp"
+        android:layout_marginStart="12sp"
+        android:hint="@string/jobTitleInfoRegister"
+        android:textSize="16sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:maxLength="60"
+        android:maxLines="1"
+        android:background="@drawable/edit_text_form"
+        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputOrganization"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingStart="12sp"
+        android:layout_marginEnd="12sp"
+        android:layout_marginTop="6sp"
+        android:layout_marginStart="12sp"
+        android:hint="@string/organizationInfoRegister"
+        android:textSize="16sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:maxLength="60"
+        android:maxLines="1"
+        android:background="@drawable/edit_text_form"
+        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputPassword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:paddingStart="12sp"
+        android:layout_marginTop="6sp"
+        android:layout_marginEnd="12sp"
+        android:layout_marginStart="12sp"
+        android:hint="@string/passwordInfoRegister"
+        android:textSize="16sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:maxLength="40"
+        android:maxLines="1"
+        android:background="@drawable/edit_text_form"
+        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNextStage"
+        android:layout_width="match_parent"
+        android:layout_margin="12sp"
+        android:fontFamily="@font/bandera_small_font"
+        android:textColorHint="@color/colorWhite"
+        android:hint="@string/btnTextRegisterChangeStage"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        android:background="@drawable/general_complete_btn_form"
+        android:layout_weight="1"/>
+</LinearLayout>
