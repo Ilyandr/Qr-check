@@ -65,5 +65,5 @@ object RestModule
         get() = EngineSDK.di.instance()
 }
 
-val EngineSDK.rest: RestModule
+val EngineSDK.restAPI: RestModule
     get() = RestModule

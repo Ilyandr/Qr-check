@@ -1,0 +1,6 @@
+<vector xmlns:tools="http://schemas.android.com/tools"
+    android:height="24dp" android:viewportHeight="256"
+    android:viewportWidth="256" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/colorGeneralThemeApp" android:pathData="M104,44h-48a12.01,12.01 0,0 0,-12 12v48a12.01,12.01 0,0 0,12 12h48a12.01,12.01 0,0 0,12 -12L116,56A12.01,12.01 0,0 0,104 44ZM108,104a4,4 0,0 1,-4 4h-48a4,4 0,0 1,-4 -4L52,56a4,4 0,0 1,4 -4h48a4,4 0,0 1,4 4ZM104,140h-48a12.01,12.01 0,0 0,-12 12v48a12.01,12.01 0,0 0,12 12h48a12.01,12.01 0,0 0,12 -12L116,152A12.01,12.01 0,0 0,104 140ZM108,200a4,4 0,0 1,-4 4h-48a4,4 0,0 1,-4 -4L52,152a4,4 0,0 1,4 -4h48a4,4 0,0 1,4 4ZM200,44h-48a12.01,12.01 0,0 0,-12 12v48a12.01,12.01 0,0 0,12 12h48a12.01,12.01 0,0 0,12 -12L212,56A12.01,12.01 0,0 0,200 44ZM204,104a4,4 0,0 1,-4 4h-48a4,4 0,0 1,-4 -4L148,56a4,4 0,0 1,4 -4h48a4,4 0,0 1,4 4ZM140,176L140,144a4,4 0,0 1,8 0v32a4,4 0,0 1,-8 0ZM212,160a4,4 0,0 1,-4 4h-28v44a4,4 0,0 1,-4 4h-32a4,4 0,1 1,0 -8h28L172,144a4,4 0,0 1,8 0v12h28A4,4 0,0 1,212 160ZM212,192v16a4,4 0,0 1,-8 0L204,192a4,4 0,0 1,8 0Z"
+        tools:ignore="VectorPath" />
+</vector>

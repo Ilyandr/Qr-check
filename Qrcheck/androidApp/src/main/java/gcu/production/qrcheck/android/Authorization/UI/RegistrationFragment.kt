@@ -10,14 +10,14 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.navigation.Navigation
 import gcu.production.qrcheck.AppEngine.EngineSDK
-import gcu.production.qrcheck.RestAPI.Features.RestInteraction.rest
+import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.RestAPI.Models.User.UserOutputEntity
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
-import gcu.production.qrcheck.android.Authorization.Service.SharedPreferencesAuth
-import gcu.production.qrcheck.android.Authorization.Service.SharedPreferencesAuth.Companion.LOGIN_ID
-import gcu.production.qrcheck.android.Authorization.Service.SharedPreferencesAuth.Companion.PASSWORD_ID
+import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qrcheck.android.Service.SharedPreferencesAuth.Companion.LOGIN_ID
+import gcu.production.qrcheck.android.Service.SharedPreferencesAuth.Companion.PASSWORD_ID
 import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.GeneralAppUI.PopupMenuCreator
@@ -101,11 +101,11 @@ internal class RegistrationFragment : Fragment(), GeneralStructure
     {
         this.loadingDialog.startLoadingDialog()
 
-        val sendRegisterData: Deferred<UserInputEntity> =
+        val sendRegisterData: Deferred<UserInputEntity?> =
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK
-                    .rest
+                    .restAPI
                     .restAuthRepository
                     .registration(
                         UserOutputEntity(
@@ -121,20 +121,30 @@ internal class RegistrationFragment : Fragment(), GeneralStructure
 
         GlobalScope.launch(Dispatchers.Main)
         {
-            val sharedPreferencesAuth =
-                SharedPreferencesAuth(requireActivity())
+            sendRegisterData.await()?.let {
+                val sharedPreferencesAuth =
+                    SharedPreferencesAuth(requireActivity())
 
-            sharedPreferencesAuth.actionWithAuth(
-                PASSWORD_ID
-                , sendRegisterData.await().password)
-            sharedPreferencesAuth.actionWithAuth(
-                LOGIN_ID
-                , requireArguments().getString(LOGIN_KEY)!!)
+                sharedPreferencesAuth.actionWithAuth(
+                    PASSWORD_ID
+                    , viewBinding.inputPassword.text.toString())
+                sharedPreferencesAuth.actionWithAuth(
+                    LOGIN_ID
+                    , it.phone)
+                sharedPreferencesAuth.actionWithAuth(
+                    SharedPreferencesAuth.ROLE_ID
+                    , it.roles?.get(0))
+
+                Navigation
+                    .findNavController(viewBinding.root)
+                    .navigate(
+                        if (it.roles?.get(0) == getString(R.string.roleID0))
+                            R.id.actionLaunchGeneralAppFragmentUser
+                        else
+                            R.id.actionLaunchGeneralAppFragmentAdmin)
+            } ?: showFaultResultCheckData()
 
             loadingDialog.stopLoadingDialog()
-            Navigation
-                .findNavController(viewBinding.root)
-                .navigate(R.id.actionLaunchGeneralAppFragment)
         }
     }
 

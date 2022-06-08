@@ -11,11 +11,11 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.navigation.Navigation
 import gcu.production.qrcheck.AppEngine.EngineSDK
-import gcu.production.qrcheck.RestAPI.Features.RestInteraction.rest
+import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
-import gcu.production.qrcheck.android.Authorization.Service.SharedPreferencesAuth
+import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
 import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.R
@@ -85,7 +85,7 @@ internal class ConfirmationFragment : Fragment(), GeneralStructure
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                     EngineSDK
-                        .rest
+                        .restAPI
                         .restAuthRepository
                         .login(
                             Base64.getEncoder().encodeToString(
@@ -103,14 +103,21 @@ internal class ConfirmationFragment : Fragment(), GeneralStructure
 
                 sharedPreferencesAuth.actionWithAuth(
                     SharedPreferencesAuth.PASSWORD_ID
-                    , it.password)
+                    , viewBinding.inputPassword.text.toString())
                 sharedPreferencesAuth.actionWithAuth(
                     SharedPreferencesAuth.LOGIN_ID
                     , it.phone)
+                sharedPreferencesAuth.actionWithAuth(
+                    SharedPreferencesAuth.ROLE_ID
+                    , it.roles?.get(0))
 
                 Navigation
                     .findNavController(viewBinding.root)
-                    .navigate(R.id.actionLaunchGeneralAppFragment)
+                    .navigate(
+                        if (it.roles?.get(0) == getString(R.string.roleID0))
+                            R.id.actionLaunchGeneralAppFragmentUser
+                        else
+                            R.id.actionLaunchGeneralAppFragmentAdmin)
             } ?: errorCheckPassword()
 
             loadingDialog.stopLoadingDialog()

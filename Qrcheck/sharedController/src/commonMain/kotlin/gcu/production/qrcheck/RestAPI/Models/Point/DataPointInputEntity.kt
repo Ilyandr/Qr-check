@@ -4,10 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DataPointInputEntity(
-    val id: Long
-    , val creatorId: Long
-    , val x: Double
-    , val y: Double
-    , val radius: Int
-    , val createTime: String
-    , val actualTime: String)
+    var id: Long? = null
+    , var creatorId: Long? = null
+    , var x: Double? = null
+    , var y: Double? = null
+    , var radius: Int? = null
+    , var createTime: String? = null
+    , var actualTime: String? = null
+)

@@ -15,7 +15,8 @@ class KtorRestAuthDataSource(private val httpClient: HttpClient): RestAuthDataSo
 {
     override suspend fun registration(
         userOutputEntity: UserOutputEntity
-    ): UserInputEntity =
+    ): UserInputEntity? = try
+    {
         Json.decodeFromString(this.httpClient.post<HttpStatement>
         {
             url {
@@ -24,18 +25,27 @@ class KtorRestAuthDataSource(private val httpClient: HttpClient): RestAuthDataSo
                 header(key = "Content-Type", value = "application/json")
             }
         }.execute().readText())
+    } catch (ex: Exception) { null }
 
     override suspend fun login(
-        userLoginKey: String?): UserInputEntity =
-        Json.decodeFromString(this.httpClient.get<HttpStatement>
+        userLoginKey: String?): UserInputEntity? = try
         {
-            url {
-                path("login")
-                header(
-                    HttpHeaders.Authorization
-                    , value = "Basic $userLoginKey")
+            this.httpClient.get<HttpStatement>
+            {
+                url {
+                    path("login")
+                    header(
+                        HttpHeaders.Authorization
+                        , value = "Basic $userLoginKey")
+                }
+            }.execute().let {
+                if (it.status == HttpStatusCode.OK)
+                    Json.decodeFromString(
+                        it.readText()) as UserInputEntity
+                else null
             }
-        }.execute().readText())
+        } catch (ex: Exception) { null }
+
 
     override suspend fun existUser(userLoginData: String?) =
         Json.decodeFromString(this.httpClient.get<HttpStatement>

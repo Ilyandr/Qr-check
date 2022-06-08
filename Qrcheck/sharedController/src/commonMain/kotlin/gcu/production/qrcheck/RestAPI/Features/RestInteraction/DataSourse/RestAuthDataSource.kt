@@ -7,10 +7,10 @@ interface RestAuthDataSource
 {
     suspend fun registration(
         userOutputEntity: UserOutputEntity
-    ): UserInputEntity
+    ): UserInputEntity?
 
     suspend fun login(
-        userLoginKey: String?): UserInputEntity
+        userLoginKey: String?): UserInputEntity?
 
     suspend fun existUser(
         userLoginData: String?): Boolean

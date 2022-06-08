@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import gcu.production.qrcheck.AppEngine.EngineSDK
-import gcu.production.qrcheck.RestAPI.Features.RestInteraction.rest
+import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
@@ -69,7 +69,7 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK
-                    .rest
+                    .restAPI
                     .restAuthRepository
                     .existUser(newCorrectValue[0])
             }

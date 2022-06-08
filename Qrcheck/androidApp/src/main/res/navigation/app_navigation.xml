@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/authorization_navigation"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/launchControllerFragment">
     <fragment
         android:id="@+id/registrationFragment"
         android:name="gcu.production.qrcheck.android.Authorization.UI.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
-            android:id="@+id/action_registrationFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
-        <action
-            android:id="@+id/actionLaunchGeneralAppFragment"
+            android:id="@+id/actionLaunchGeneralAppFragmentUser"
             app:destination="@id/generalAppFragment" />
+        <action
+            android:id="@+id/actionLaunchGeneralAppFragmentAdmin"
+            app:destination="@id/generalAppFragmentAdmin" />
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"
         android:name="gcu.production.qrcheck.android.Authorization.UI.ConfirmationFragment"
         android:label="ConfirmationFragment" >
         <action
-            android:id="@+id/action_confirmationFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
-        <action
-            android:id="@+id/actionLaunchGeneralAppFragment"
+            android:id="@+id/actionLaunchGeneralAppFragmentUser"
             app:destination="@id/generalAppFragment" />
+        <action
+            android:id="@+id/actionLaunchGeneralAppFragmentAdmin"
+            app:destination="@id/generalAppFragmentAdmin" />
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
@@ -41,7 +41,46 @@
     </fragment>
     <fragment
         android:id="@+id/generalAppFragment"
-        android:name="gcu.production.qrcheck.android.Main.GeneralAppFragment"
+        android:name="gcu.production.qrcheck.android.Main.User.GeneralAppFragmentUser"
         android:label="fragment_general_app"
-        tools:layout="@layout/fragment_general_app" />
+        tools:layout="@layout/fragment_general_app_user" />
+    <fragment
+        android:id="@+id/launchControllerFragment"
+        android:name="gcu.production.qrcheck.android.Authorization.UI.LaunchControllerFragment"
+        android:label="fragment_launch_controller"
+        tools:layout="@layout/fragment_launch_controller" >
+        <action
+            android:id="@+id/primaryLaunchAuth"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/primaryLaunchGeneralFragmentUser"
+            app:destination="@id/generalAppFragment" />
+        <action
+            android:id="@+id/primaryLaunchGeneralFragmentAdmin"
+            app:destination="@id/generalAppFragmentAdmin" />
+    </fragment>
+    <fragment
+        android:id="@+id/generalAppFragmentAdmin"
+        android:name="gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin"
+        android:label="fragment_general_app_admin"
+        tools:layout="@layout/fragment_general_app_admin" >
+
+        <action
+            android:id="@+id/actionLaunchListAllRecordsFragment"
+            app:destination="@id/listAllRecordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentShowQR"
+        android:name="gcu.production.qrcheck.android.Main.Admin.FragmentShowQR"
+        android:label="fragment_show_q_r"
+        tools:layout="@layout/fragment_show_q_r" />
+    <fragment
+        android:id="@+id/listAllRecordsFragment"
+        android:name="gcu.production.qrcheck.android.Main.Admin.ListAllRecordsFragment"
+        android:label="fragment_list_all_records"
+        tools:layout="@layout/fragment_list_all_records" >
+        <action
+            android:id="@+id/actionLaunchFragmentShowQR"
+            app:destination="@id/fragmentShowQR" />
+    </fragment>
 </navigation>

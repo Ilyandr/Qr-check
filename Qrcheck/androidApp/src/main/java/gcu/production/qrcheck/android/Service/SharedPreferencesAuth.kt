@@ -1,4 +1,4 @@
-package gcu.production.qrcheck.android.Authorization.Service
+package gcu.production.qrcheck.android.Service
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -29,5 +29,6 @@ internal class SharedPreferencesAuth(context: Context)
     {
         internal const val LOGIN_ID = "login"
         internal const val PASSWORD_ID = "password"
+        internal const val ROLE_ID = "role"
     }
 }

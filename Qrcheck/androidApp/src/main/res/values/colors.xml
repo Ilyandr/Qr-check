@@ -4,6 +4,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGray">#353535</color>
     <color name="colorGrayAdditional">#835C5C5C</color>
+    <color name="colorGrayBar">#83E1E1E1</color>
     <color name="colorTransparent">#00FFFEFE</color>
     <color name="colorGeneralThemeApp">#5291FF</color>
 </resources>
