@@ -11,7 +11,7 @@ interface RestPointDataSource
     ): DataPointInputEntity
 
     suspend fun generateToken(
-        userLoginKey: String?, pointID: Long): String
+        userLoginKey: String?, pointID: Long): String?
 
     suspend fun getAllPoint(
         userLoginKey: String?): MutableList<DataPointInputEntity>

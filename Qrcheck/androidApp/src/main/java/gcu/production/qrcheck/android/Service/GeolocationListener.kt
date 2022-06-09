@@ -11,7 +11,10 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import gcu.production.qrcheck.android.R
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -21,12 +24,11 @@ import kotlinx.coroutines.launch
 @DelicateCoroutinesApi
 internal class GeolocationListener(
     private val context: Context
-    , private val locationAction: (
-        location: Location) -> Unit)
+    , private val locationAction: (location: Location) -> Unit
+    , private val actionFault: Runnable? = null)
 {
     private val fusedLocationClient =
         LocationServices.getFusedLocationProviderClient(context)
-
 
     @SuppressLint("MissingPermission")
     fun launch(actionForFault: (() -> Unit)? = null)
@@ -36,6 +38,8 @@ internal class GeolocationListener(
                 .isProviderEnabled(
                     LocationManager.GPS_PROVIDER))
         {
+            this.actionFault?.run()
+
             AlertDialog.Builder(this.context)
                 .setTitle(R.string.infoAlertDialog)
                 .setMessage(R.string.alertDialogOnGPS)
@@ -53,11 +57,24 @@ internal class GeolocationListener(
             return
         }
 
-        fusedLocationClient.lastLocation.addOnSuccessListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                this@GeolocationListener.locationAction(it)
+        this.fusedLocationClient.getCurrentLocation(
+            PRIORITY_HIGH_ACCURACY, object: CancellationToken()
+            {
+                override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken
+                {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        actionFault?.run()
+                    }
+                    return this
+                }
+
+                override fun isCancellationRequested(): Boolean = true
+            })
+            .addOnSuccessListener {
+                GlobalScope.launch(Dispatchers.Main) {
+                    this@GeolocationListener.locationAction(it)
+                }
             }
-        }
     }
 
     companion object

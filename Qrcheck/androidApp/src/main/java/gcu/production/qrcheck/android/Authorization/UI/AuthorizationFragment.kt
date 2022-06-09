@@ -65,7 +65,7 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
     {
         this.progressDialog.startLoadingDialog()
 
-        val checkExistUserData: Deferred<Boolean> =
+        val checkExistUserData: Deferred<Boolean?> =
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK
@@ -83,7 +83,8 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
             Navigation
                 .findNavController(viewBinding.root)
                 .navigate(
-                    if (checkExistUserData.await())
+                    if (checkExistUserData.await() != null
+                        && checkExistUserData.await()!!)
                         R.id.actionLaunchConfirmationFragment
                     else
                         R.id.actionLaunchRegistrationFragment

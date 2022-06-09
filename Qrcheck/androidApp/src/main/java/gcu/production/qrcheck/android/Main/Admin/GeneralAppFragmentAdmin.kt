@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
@@ -21,33 +22,38 @@ import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.Point.DataPointInputEntity
 import gcu.production.qrcheck.RestAPI.Models.Point.DataPointOutputEntity
 import gcu.production.qrcheck.StructureApp.GeneralStructure
+import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterPoint
 import gcu.production.qrcheck.android.Service.GeolocationListener
 import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
+import gcu.production.qrcheck.android.Service.NetworkConnection
 import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
 import gcu.production.qrcheck.android.databinding.FragmentGeneralAppAdminBinding
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 
 @DelicateCoroutinesApi
-internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
+internal class GeneralAppFragmentAdmin :
+    Fragment(), GeneralStructure, NetworkActions
 {
     private lateinit var viewBinding: FragmentGeneralAppAdminBinding
     private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var geolocationListener: GeolocationListener
     private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
     private lateinit var animSelected: Animation
+
     private var radius: Int? = null
+    private var timeActive: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View
     {
         objectsInit()
-        basicBehavior()
+        launchWithCheckNetworkConnection()
         return this.viewBinding.root
     }
 
@@ -79,7 +85,16 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
 
         this.viewBinding.btnCreatePoint.setOnClickListener {
             it.startAnimation(this.animSelected)
-            showDialogCreatePointOptions()
+
+            NetworkConnection
+                .checkingAccessWithActions(
+                    actionSuccess = ::showDialogCreatePointOptions
+                    , actionFault = ::networkFaultConnection
+                    , actionsLoadingAfterAndBefore =  Pair(
+                        Runnable { this.loadingDialog.startLoadingDialog() }
+                        , Runnable { this.loadingDialog.stopLoadingDialog() })
+                    ,  listenerForFailConnection = this
+                )
         }
 
         this.viewBinding.listAllPoint.setOnItemClickListener {
@@ -100,6 +115,24 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
         }
     }
 
+    override fun launchWithCheckNetworkConnection() =
+        NetworkConnection
+            .checkingAccessWithActions(
+                actionSuccess = ::basicBehavior
+                , actionFault = ::networkFaultConnection
+                , actionsLoadingAfterAndBefore =  Pair(
+                    Runnable { this.loadingDialog.startLoadingDialog() }
+                    , Runnable { this.loadingDialog.stopLoadingDialog() })
+                ,  listenerForFailConnection = this
+            )
+
+    override fun networkFaultConnection() =
+        Toast.makeText(
+            requireContext()
+            ,R.string.toastMessageFaultConnection
+            , Toast.LENGTH_SHORT)
+            .show()
+
     private fun loadDataForListView()
     {
         this.loadingDialog.startLoadingDialog()
@@ -116,6 +149,13 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
 
         GlobalScope.launch(Dispatchers.Main)
         {
+            try
+            {
+                viewBinding
+                    .listAllPoint
+                    .removeAllViews()
+            } catch (ex: UnsupportedOperationException) {}
+
             viewBinding.listAllPoint.adapter =
                 CustomListViewAdapterPoint(
                     requireContext()
@@ -140,25 +180,47 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
 
     private fun showDialogCreatePointOptions()
     {
-        val editText =
+        val userInputDataRadius =
             AppCompatEditText(requireContext())
-        editText.hint =
+        val userInputDataTime =
+            AppCompatEditText(requireContext())
+        val layoutContainer =
+            LinearLayout(requireContext())
+
+        userInputDataRadius.hint =
             getString(R.string.infoEditTextQRCreator)
-        editText.inputType = InputType.TYPE_CLASS_NUMBER
-        editText.gravity = Gravity.CENTER
+        userInputDataTime.hint =
+            getString(R.string.infoEditTextQRCreator1)
+
+        userInputDataRadius.inputType =
+            InputType.TYPE_CLASS_NUMBER
+        userInputDataTime.inputType =
+            InputType.TYPE_CLASS_DATETIME
+
+        userInputDataTime.gravity = Gravity.CENTER
+        userInputDataRadius.gravity = Gravity.CENTER
+        layoutContainer.gravity = Gravity.CENTER
+        layoutContainer.orientation = LinearLayout.VERTICAL
+
+        layoutContainer.addView(userInputDataRadius)
+        layoutContainer.addView(userInputDataTime)
 
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.infoCreateQRTitle))
             .setMessage(getString(R.string.infoMessageQRCreator))
-            .setView(editText)
+            .setView(layoutContainer)
             .setPositiveButton("Создать")
             {it, _ ->
-                if (requireActivity().checkPermissions())
+                if (requireActivity().checkPermissions()
+                    && !userInputDataRadius.text.isNullOrEmpty()
+                    && !userInputDataTime.text.isNullOrEmpty())
                 {
                    try
                    {
                        this.radius =
-                           editText.text?.toString()?.toInt()
+                           userInputDataRadius.text?.toString()?.toInt()
+                       this.timeActive =
+                           userInputDataTime.text?.toString()?.toLong()
                    } catch (ex: ClassCastException)
                    {
                        Toast.makeText(
@@ -199,7 +261,11 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
                             location.longitude
                             , location.latitude
                             , this@GeneralAppFragmentAdmin.radius!!
-                            , LocalDateTime.now().toString()
+                            , LocalDateTime
+                                .now()
+                                .plusDays(
+                                    this@GeneralAppFragmentAdmin.timeActive ?: 31)
+                                .toString()
                         )
                     )
             }
@@ -210,7 +276,11 @@ internal class GeneralAppFragmentAdmin : Fragment(), GeneralStructure
 
             Toast.makeText(
                 requireContext()
-                , if (sendCompleteData.await() != null) R.string.successCreateQR
+                , if (sendCompleteData.await() != null)
+                {
+                    loadDataForListView()
+                    R.string.successCreateQR
+                }
                 else
                     R.string.faultCreateQR
                 , Toast.LENGTH_LONG)

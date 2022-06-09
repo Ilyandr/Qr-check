@@ -7,23 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.StructureApp.GeneralStructure
+import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.R
 import gcu.production.qrcheck.android.Service.Detectors.BarcodeDetectorService
 import gcu.production.qrcheck.android.Service.GeolocationListener
 import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
+import gcu.production.qrcheck.android.Service.NetworkConnection
 import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
 import gcu.production.qrcheck.android.databinding.FragmentGeneralAppUserBinding
 import kotlinx.coroutines.*
 
 @DelicateCoroutinesApi
-internal class GeneralAppFragmentUser : Fragment(), GeneralStructure
+internal class GeneralAppFragmentUser
+    : Fragment(), GeneralStructure, NetworkActions
 {
     private lateinit var viewBinding: FragmentGeneralAppUserBinding
     private lateinit var barcodeDetectorService: BarcodeDetectorService
@@ -37,7 +41,7 @@ internal class GeneralAppFragmentUser : Fragment(), GeneralStructure
         savedInstanceState: Bundle?): View
     {
         objectsInit()
-        basicBehavior()
+        launchWithCheckNetworkConnection()
         return this.viewBinding.root
     }
 
@@ -100,7 +104,7 @@ internal class GeneralAppFragmentUser : Fragment(), GeneralStructure
                             requireContext()
                         ).encodeAuthDataToBase64Key()
                         , this@GeneralAppFragmentUser.barcodeCompleteInfo
-                        , Pair(location.latitude, location.longitude)
+                        , Pair(location.longitude, location.latitude)
                     )
             }
 
@@ -129,6 +133,24 @@ internal class GeneralAppFragmentUser : Fragment(), GeneralStructure
         this.barcodeDetectorService
             .surfaceDestroyed(viewBinding.cameraSurfaceView.holder)
     } catch (ignored: Exception) { }
+
+    override fun launchWithCheckNetworkConnection() =
+        NetworkConnection
+            .checkingAccessWithActions(
+                actionSuccess = ::basicBehavior
+                , actionFault = ::networkFaultConnection
+                , actionsLoadingAfterAndBefore =  Pair(
+                    Runnable { this.loadingDialog.startLoadingDialog() }
+                    , Runnable { this.loadingDialog.stopLoadingDialog() })
+                ,  listenerForFailConnection = this
+            )
+
+    override fun networkFaultConnection() =
+        Toast.makeText(
+            requireContext()
+            ,R.string.toastMessageFaultConnection
+            , Toast.LENGTH_SHORT)
+            .show()
 
     override fun onDestroy()
     {

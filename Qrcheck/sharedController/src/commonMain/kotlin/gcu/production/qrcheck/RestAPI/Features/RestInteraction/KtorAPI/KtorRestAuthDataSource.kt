@@ -47,7 +47,8 @@ class KtorRestAuthDataSource(private val httpClient: HttpClient): RestAuthDataSo
         } catch (ex: Exception) { null }
 
 
-    override suspend fun existUser(userLoginData: String?) =
+    override suspend fun existUser(userLoginData: String?) = try
+    {
         Json.decodeFromString(this.httpClient.get<HttpStatement>
         {
             url {
@@ -55,4 +56,5 @@ class KtorRestAuthDataSource(private val httpClient: HttpClient): RestAuthDataSo
                 path("existUser")
             }
         }.execute().readText()) as Boolean
+    } catch (ex: Exception) { null }
 }

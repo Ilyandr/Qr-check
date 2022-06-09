@@ -37,31 +37,38 @@ class KtorRestPointDataSource(
         }.execute().readText())
 
     override suspend fun generateToken(
-        userLoginKey: String?, pointID: Long): String =
-        this.httpClient.get<HttpStatement>
+        userLoginKey: String?, pointID: Long): String? =
+        try
         {
-            url {
-                path("generateToken")
-                header(
-                    HttpHeaders.Authorization
-                    , value = "Basic $userLoginKey")
-                parameter("pointId", pointID)
-            }
-        }.execute().readText()
-
-    override suspend fun getAllPoint(
-        userLoginKey: String?): MutableList<DataPointInputEntity> =
-        Json.decodeFromString(
-            ListSerializer(
-                DataPointInputEntity.serializer())
-            ,  this.httpClient.get<HttpStatement>
+            this.httpClient.get<HttpStatement>
             {
                 url {
-                    path("getAllPoint")
+                    path("generateToken")
                     header(
                         HttpHeaders.Authorization
                         , value = "Basic $userLoginKey")
+                    parameter("pointId", pointID)
                 }
-            }.execute()
-                .readText()) as MutableList<DataPointInputEntity>
+            }.execute().readText()
+        } catch (ex: Exception) { null }
+
+    override suspend fun getAllPoint(
+        userLoginKey: String?): MutableList<DataPointInputEntity> =
+        try
+        {
+            Json.decodeFromString(
+                ListSerializer(
+                    DataPointInputEntity.serializer())
+                ,  this.httpClient.get<HttpStatement>
+                {
+                    url {
+                        path("getAllPoint")
+                        header(
+                            HttpHeaders.Authorization
+                            , value = "Basic $userLoginKey")
+                    }
+                }.execute()
+                    .readText())
+        } catch (ex: Exception) { emptyList() }
+                as MutableList<DataPointInputEntity>
 }

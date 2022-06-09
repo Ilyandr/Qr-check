@@ -7,21 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.StructureApp.GeneralStructure
+import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
+import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Companion.DATA_SELECT_KEY
 import gcu.production.qrcheck.android.R
 import gcu.production.qrcheck.android.Service.BarcodeGenerator.setCardBarcode
+import gcu.production.qrcheck.android.Service.NetworkConnection
 import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
 import gcu.production.qrcheck.android.databinding.FragmentShowQRBinding
 import kotlinx.coroutines.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 @DelicateCoroutinesApi
-internal class FragmentShowQR : Fragment(), GeneralStructure
+internal class FragmentShowQR
+    : Fragment(), GeneralStructure, NetworkActions
 {
     private lateinit var viewBinding: FragmentShowQRBinding
+    private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var basicAnimation: Animation
 
     override fun onCreateView(
@@ -29,7 +37,7 @@ internal class FragmentShowQR : Fragment(), GeneralStructure
         savedInstanceState: Bundle?): View
     {
         objectsInit()
-        basicBehavior()
+        launchWithCheckNetworkConnection()
         return this.viewBinding.root
     }
 
@@ -37,6 +45,10 @@ internal class FragmentShowQR : Fragment(), GeneralStructure
     {
         this.viewBinding =
             FragmentShowQRBinding.inflate(layoutInflater)
+
+        this.loadingDialog =
+            CustomLoadingDialog(requireActivity())
+
         this.basicAnimation =
             AnimationUtils.loadAnimation(
                 requireContext()
@@ -45,7 +57,25 @@ internal class FragmentShowQR : Fragment(), GeneralStructure
 
     override fun basicBehavior()
     {
-        generateBarcodeImage()
+        Executors
+            .newSingleThreadScheduledExecutor()
+            .scheduleAtFixedRate(
+                {
+                    if (!NetworkConnection.isActiveConnectionListener)
+                        NetworkConnection
+                            .checkingAccessWithActions(
+                                actionSuccess = ::generateBarcodeImage
+                                , actionFault = ::networkFaultConnection
+                                , actionsLoadingAfterAndBefore =  Pair(
+                                    Runnable { this.loadingDialog.startLoadingDialog() }
+                                    , Runnable { this.loadingDialog.stopLoadingDialog() })
+                                ,  listenerForFailConnection = this
+                            )
+                }
+                , 0
+                , 1
+                , TimeUnit.MINUTES
+            )
 
         this.viewBinding.btnBack.setOnClickListener {
             it.startAnimation(this.basicAnimation)
@@ -81,8 +111,29 @@ internal class FragmentShowQR : Fragment(), GeneralStructure
                 .setImageBitmap(
                     Pair(1920, 1080) setCardBarcode generateToken.await())
 
+            if (generateToken.await() == null)
+                generateBarcodeImage()
+
             this@FragmentShowQR.viewBinding.statusTextView.text =
                 getString(R.string.infoScanAdminQR)
         }
     }
+
+    override fun launchWithCheckNetworkConnection() =
+        NetworkConnection
+            .checkingAccessWithActions(
+                actionSuccess = ::basicBehavior
+                , actionFault = ::networkFaultConnection
+                , actionsLoadingAfterAndBefore =  Pair(
+                    Runnable { this.loadingDialog.startLoadingDialog() }
+                    , Runnable { this.loadingDialog.stopLoadingDialog() })
+                ,  listenerForFailConnection = this
+            )
+
+    override fun networkFaultConnection() =
+        Toast.makeText(
+            requireContext()
+            ,R.string.toastMessageFaultConnection
+            , Toast.LENGTH_SHORT)
+            .show()
 }

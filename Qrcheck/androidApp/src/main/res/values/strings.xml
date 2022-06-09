@@ -19,9 +19,9 @@
     <string name="jobTitleInfoRegister">Должность</string>
     <string name="nameInfoRegister">Ф.И.О</string>
     <string name="infoTextLoadingDialog">Загрузка</string>
-    <string name="toastErrorCheckLogin">Ошибка - введён некорректный номер телефона</string>
+    <string name="toastErrorCheckLogin">Ошибка - введён некорректный номер телефона или отсутствует интернет-соединение</string>
     <string name="toastErrorCommonCheckData">Ошибка - введены некорректные данные</string>
-    <string name="toastErrorPassword">Ошибка - введён неверный пароль от аккаунта</string>
+    <string name="toastErrorPassword">Ошибка - введён неверный пароль от аккаунта или отсутствует интернет-соединение</string>
     <string name="infoPopupMenuRole0">Сотрудник</string>
     <string name="infoPopupMenuRole1">Работодатель</string>
     <string name="infoHintScanQR">Сканировать QR-код</string>
@@ -49,4 +49,8 @@
     <string name="infoNameFragmentAllRecords">Данные</string>
     <string name="infoNameFragmentGeneralAdmin">Список точек</string>
     <string name="infoLaunchBtnQRCode">QR-код</string>
+    <string name="infoEditTextQRCreator1">Время действия (в днях)</string>
+    <string name="toastMessageFaultConnection">Ошибка интернет-соеденения, проверьте ваше подключение</string>
+    <string name="successPermissionInfo">Резрешения успешно предоставлены! Поворите выбранное действие</string>
+    <string name="faultPermissionInfo">Ошибка - не предоставлены нужные разрешения</string>
 </resources>

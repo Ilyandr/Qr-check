@@ -152,7 +152,7 @@ internal class RegistrationFragment : Fragment(), GeneralStructure
     {
         this.viewBinding.registerRoleInfo.text =
             getString(
-                if (newUserRole == "USER")
+                if (newUserRole == getString(R.string.roleID0))
                     R.string.infoPopupMenuRole0
                 else
                     R.string.infoPopupMenuRole1)

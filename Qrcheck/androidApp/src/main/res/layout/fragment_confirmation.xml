@@ -37,6 +37,7 @@
         android:layout_weight="1"
         android:gravity="left|center"
         android:paddingStart="12sp"
+        android:inputType="textPassword"
         android:layout_margin="12sp"
         android:hint="@string/textPasswordEditTextInfo"
         android:textSize="16sp"

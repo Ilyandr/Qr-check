@@ -15,35 +15,40 @@ class KtorRestRecordDataSource(
     override suspend fun setRecord(
         userAuthKey: String?,
         dataToken: String?,
-        userLocation: Pair<Double, Double>): Long? =
-        this.httpClient.post<HttpStatement>
+        userLocation: Pair<Double, Double>): Long? = try
         {
-            url {
-                path("setRecord")
-                header(
-                    HttpHeaders.Authorization
-                    , value = "Basic $userAuthKey")
-
-                parameter("token", dataToken)
-                parameter("x", userLocation.first)
-                parameter("y", userLocation.second)
-            }
-        }.execute().readText().toLongOrNull()
-
-    override suspend fun getAllRecord(
-        userAuthKey: String?, pointId: Long): MutableList<UserInputEntity> =
-        Json.decodeFromString(
-            ListSerializer(
-                UserInputEntity.serializer())
-            ,  this.httpClient.get<HttpStatement>
+            this.httpClient.post<HttpStatement>
             {
                 url {
-                    path("getAllRecord")
+                    path("setRecord")
                     header(
                         HttpHeaders.Authorization
                         , value = "Basic $userAuthKey")
-                    parameter("pointId", pointId)
+
+                    parameter("token", dataToken)
+                    parameter("x", userLocation.first)
+                    parameter("y", userLocation.second)
                 }
-            }.execute()
-                .readText()) as MutableList<UserInputEntity>
+            }.execute().readText().toLongOrNull()
+        } catch (ex: Exception) { null }
+
+    override suspend fun getAllRecord(
+        userAuthKey: String?, pointId: Long): MutableList<UserInputEntity> =
+        try
+        {
+            Json.decodeFromString(
+                ListSerializer(
+                    UserInputEntity.serializer())
+                ,  this.httpClient.get<HttpStatement>
+                {
+                    url {
+                        path("getAllRecord")
+                        header(
+                            HttpHeaders.Authorization
+                            , value = "Basic $userAuthKey")
+                        parameter("pointId", pointId)
+                    }
+                }.execute()
+                    .readText()) as MutableList<UserInputEntity>
+        } catch (ex: Exception) { mutableListOf() }
 }

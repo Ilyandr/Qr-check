@@ -11,7 +11,7 @@ object DataCorrectness
     const val PASSWORD_ACTION: Short = 117
     const val COMMON_ACTION_REGISTER: Short = 137
 
-    private const val REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$"
+    //private const val REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$"
     private const val REGEX_PHONE_RU = "8(?:\\d{3}){2}(?:\\d{2}){2}"
 
     @JvmStatic

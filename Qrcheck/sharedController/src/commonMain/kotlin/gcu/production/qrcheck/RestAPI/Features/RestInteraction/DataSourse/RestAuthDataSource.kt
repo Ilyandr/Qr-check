@@ -13,5 +13,5 @@ interface RestAuthDataSource
         userLoginKey: String?): UserInputEntity?
 
     suspend fun existUser(
-        userLoginData: String?): Boolean
+        userLoginData: String?): Boolean?
 }

@@ -6,22 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.navigation.Navigation
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.StructureApp.GeneralStructure
+import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Companion.DATA_SELECT_KEY
 import gcu.production.qrcheck.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterRecord
+import gcu.production.qrcheck.android.Service.NetworkConnection
 import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
 import gcu.production.qrcheck.android.databinding.FragmentListAllRecordsBinding
 import kotlinx.coroutines.*
 
 @DelicateCoroutinesApi
-internal class ListAllRecordsFragment : Fragment(), GeneralStructure
+internal class ListAllRecordsFragment
+    : Fragment(), GeneralStructure, NetworkActions
 {
     private lateinit var viewBinding: FragmentListAllRecordsBinding
     private lateinit var loadingDialog: CustomLoadingDialog
@@ -31,7 +35,7 @@ internal class ListAllRecordsFragment : Fragment(), GeneralStructure
         savedInstanceState: Bundle?): View
     {
         objectsInit()
-        basicBehavior()
+        launchWithCheckNetworkConnection()
         return this.viewBinding.root
     }
 
@@ -97,4 +101,22 @@ internal class ListAllRecordsFragment : Fragment(), GeneralStructure
             loadingDialog.stopLoadingDialog()
         }
     }
+
+    override fun launchWithCheckNetworkConnection() =
+        NetworkConnection
+            .checkingAccessWithActions(
+                actionSuccess = ::basicBehavior
+                , actionFault = ::networkFaultConnection
+                , actionsLoadingAfterAndBefore =  Pair(
+                    Runnable { this.loadingDialog.startLoadingDialog() }
+                    , Runnable { this.loadingDialog.stopLoadingDialog() })
+                ,  listenerForFailConnection = this
+            )
+
+    override fun networkFaultConnection() =
+        Toast.makeText(
+            requireContext()
+            ,R.string.toastMessageFaultConnection
+            , Toast.LENGTH_SHORT)
+            .show()
 }

@@ -11,13 +11,15 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="DataExtractionRules"
+        tools:ignore="DataExtractionRules,MissingApplicationIcon"
         tools:targetApi="s" >
 
         <activity
             android:name=".BasicActivity"
+            android:screenOrientation="fullSensor"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
