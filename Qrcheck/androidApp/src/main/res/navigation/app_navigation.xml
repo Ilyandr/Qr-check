@@ -11,9 +11,12 @@
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/actionLaunchGeneralAppFragmentUser"
+            app:popUpToInclusive="true"
             app:destination="@id/generalAppFragment" />
         <action
             android:id="@+id/actionLaunchGeneralAppFragmentAdmin"
+            app:popUpToInclusive="true"
+            app:popUpTo="@navigation/app_navigation"
             app:destination="@id/generalAppFragmentAdmin" />
     </fragment>
     <fragment
@@ -22,9 +25,12 @@
         android:label="ConfirmationFragment" >
         <action
             android:id="@+id/actionLaunchGeneralAppFragmentUser"
+            app:popUpToInclusive="true"
             app:destination="@id/generalAppFragment" />
         <action
             android:id="@+id/actionLaunchGeneralAppFragmentAdmin"
+            app:popUpToInclusive="true"
+            app:popUpTo="@navigation/app_navigation"
             app:destination="@id/generalAppFragmentAdmin" />
     </fragment>
     <fragment
@@ -51,12 +57,15 @@
         tools:layout="@layout/fragment_launch_controller" >
         <action
             android:id="@+id/primaryLaunchAuth"
+            app:popUpToInclusive="true"
             app:destination="@id/authorizationFragment" />
         <action
             android:id="@+id/primaryLaunchGeneralFragmentUser"
+            app:popUpToInclusive="true"
             app:destination="@id/generalAppFragment" />
         <action
             android:id="@+id/primaryLaunchGeneralFragmentAdmin"
+            app:popUpToInclusive="true"
             app:destination="@id/generalAppFragmentAdmin" />
     </fragment>
     <fragment

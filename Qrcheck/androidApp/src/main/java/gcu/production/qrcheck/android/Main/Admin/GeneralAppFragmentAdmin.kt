@@ -15,7 +15,6 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.Navigation
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
@@ -160,19 +159,6 @@ internal class GeneralAppFragmentAdmin :
                 CustomListViewAdapterPoint(
                     requireContext()
                     , completeListData.await())
-
-            if (viewBinding.listAllPoint.adapter.isEmpty)
-            {
-                val headerViewInfo =
-                    AppCompatTextView(requireContext())
-
-                headerViewInfo.text =
-                    getString(R.string.infoEmptyList)
-
-                viewBinding
-                    .listAllPoint
-                    .addHeaderView(headerViewInfo)
-            }
 
             loadingDialog.stopLoadingDialog()
         }

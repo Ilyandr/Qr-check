@@ -1,5 +1,6 @@
 package gcu.production.qrcheck.android
 
+import android.content.pm.PackageManager.PERMISSION_GRANTED
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -31,7 +32,7 @@ internal class BasicActivity : AppCompatActivity()
 
             Toast.makeText(
                 this
-                , if (grantResults.all { it == RESULT_OK })
+                , if (grantResults.all { it == PERMISSION_GRANTED })
                     R.string.successPermissionInfo
                 else
                     R.string.faultPermissionInfo
