@@ -4,6 +4,7 @@ import gcu.production.qrcheck.RestAPI.AppCore.KtorSettings.ktorModule
 import gcu.production.qrcheck.RestAPI.AppCore.SerializationSettings.serializationModule
 import org.kodein.di.DI
 
+@Suppress("DEPRECATION")
 val coreModule =
     DI.Module(
          init = {

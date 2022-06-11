@@ -18,7 +18,7 @@
         tools:targetApi="s" >
 
         <activity
-            android:name=".BasicActivity"
+            android:name="gcu.production.qr_check.BasicActivity"
             android:screenOrientation="fullSensor"
             android:exported="true" >
             <intent-filter>

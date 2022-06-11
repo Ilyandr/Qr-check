@@ -11,8 +11,8 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.OnTokenCanceledListener
 import gcu.production.qr_check.android.R
@@ -58,7 +58,8 @@ internal class GeolocationListener(
         }
 
         this.fusedLocationClient.getCurrentLocation(
-            PRIORITY_HIGH_ACCURACY, object: CancellationToken()
+            Priority.PRIORITY_HIGH_ACCURACY
+            , object: CancellationToken()
             {
                 override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken
                 {
