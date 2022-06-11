@@ -6,8 +6,8 @@ plugins {
 android {
     compileSdk = 32
     defaultConfig {
-        applicationId = "gcu.production.qrcheck.android"
-        minSdk = 21
+        applicationId = "gcu.production.qr_check.android"
+        minSdk = 22
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
@@ -22,17 +22,10 @@ android {
             isMinifyEnabled = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
-    implementation(project(":sharedController"))
+    implementation(project(":shared"))
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -43,7 +36,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
     implementation("com.google.android.gms:play-services-vision-common:19.1.3")
     implementation("com.google.android.gms:play-services-vision:20.1.3@aar")
-    implementation("com.google.android.gms:play-services-location:19.0.1")
+    implementation("com.google.android.gms:play-services-location:20.0.0")
 
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0@aar")
