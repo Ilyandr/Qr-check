@@ -14,7 +14,7 @@ internal class SharedPreferencesAuth(context: Context)
                 null, Context.MODE_PRIVATE)
     }
 
-    internal fun actionWithAuth(
+    fun actionWithAuth(
         dataID: String
         , newValue: String? = null): String? =
         newValue?.let {
@@ -27,8 +27,8 @@ internal class SharedPreferencesAuth(context: Context)
 
     companion object
     {
-        internal const val LOGIN_ID = "login"
-        internal const val PASSWORD_ID = "password"
+        const val LOGIN_ID = "login"
+        const val PASSWORD_ID = "password"
         internal const val ROLE_ID = "role"
     }
 }

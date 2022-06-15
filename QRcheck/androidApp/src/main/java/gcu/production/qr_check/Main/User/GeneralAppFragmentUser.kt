@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qrcheck.StructureApp.NetworkActions
-import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Detectors.BarcodeDetectorService
@@ -32,6 +33,7 @@ internal class GeneralAppFragmentUser
     private lateinit var viewBinding: FragmentGeneralAppUserBinding
     private lateinit var barcodeDetectorService: BarcodeDetectorService
     private lateinit var geolocationListener: GeolocationListener
+    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
     private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var animSelected: Animation
     private var barcodeCompleteInfo: String? = null
@@ -53,6 +55,9 @@ internal class GeneralAppFragmentUser
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
 
+        this.sharedPreferencesAuth =
+            SharedPreferencesAuth(requireContext())
+
         this.animSelected =
             AnimationUtils.loadAnimation(
                 requireContext()
@@ -71,6 +76,12 @@ internal class GeneralAppFragmentUser
 
     override fun basicBehavior()
     {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this) {
+                requireActivity().finish()
+            }
+
         this.viewBinding.btnScanQR.setOnClickListener {
             it.startAnimation(this.animSelected)
 
@@ -100,9 +111,7 @@ internal class GeneralAppFragmentUser
                     .restAPI
                     .restRecordRepository
                     .setRecord(
-                        SharedPreferencesAuth(
-                            requireContext()
-                        ).encodeAuthDataToBase64Key()
+                        authAction()
                         , this@GeneralAppFragmentUser.barcodeCompleteInfo
                         , Pair(location.longitude, location.latitude)
                     )
@@ -151,6 +160,15 @@ internal class GeneralAppFragmentUser
             ,R.string.toastMessageFaultConnection
             , Toast.LENGTH_SHORT)
             .show()
+
+    override fun authAction() =
+        Base64Factory
+            .createEncoder()
+            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
+                SharedPreferencesAuth.LOGIN_ID)}" +
+                    ":${sharedPreferencesAuth.actionWithAuth(
+                        SharedPreferencesAuth.PASSWORD_ID)}")
+                .toByteArray())
 
     override fun onDestroy()
     {

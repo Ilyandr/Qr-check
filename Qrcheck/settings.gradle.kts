@@ -6,6 +6,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "QR-check"
 include(":androidApp")
 include(":shared")

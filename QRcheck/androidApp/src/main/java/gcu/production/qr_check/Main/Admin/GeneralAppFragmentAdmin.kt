@@ -14,15 +14,16 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.navigation.Navigation
+import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.Point.DataPointInputEntity
 import gcu.production.qrcheck.RestAPI.Models.Point.DataPointOutputEntity
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qrcheck.StructureApp.NetworkActions
-import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterPoint
@@ -81,6 +82,11 @@ internal class GeneralAppFragmentAdmin :
     override fun basicBehavior()
     {
         loadDataForListView()
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this) {
+                requireActivity().finish()
+            }
 
         this.viewBinding.btnCreatePoint.setOnClickListener {
             it.startAnimation(this.animSelected)
@@ -92,7 +98,6 @@ internal class GeneralAppFragmentAdmin :
                     , actionsLoadingAfterAndBefore =  Pair(
                         Runnable { this.loadingDialog.startLoadingDialog() }
                         , Runnable { this.loadingDialog.stopLoadingDialog() })
-                    ,  listenerForFailConnection = this
                 )
         }
 
@@ -136,14 +141,15 @@ internal class GeneralAppFragmentAdmin :
     {
         this.loadingDialog.startLoadingDialog()
 
+
+
         val completeListData: Deferred<List<DataPointInputEntity>> =
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK
                     .restAPI
                     .restPointRepository
-                    .getAllPoint(
-                        sharedPreferencesAuth.encodeAuthDataToBase64Key())
+                    .getAllPoint(authAction())
             }
 
         GlobalScope.launch(Dispatchers.Main)
@@ -242,7 +248,7 @@ internal class GeneralAppFragmentAdmin :
                     .restAPI
                     .restPointRepository
                     .generatePoint(
-                        sharedPreferencesAuth.encodeAuthDataToBase64Key()
+                        authAction()
                         , DataPointOutputEntity(
                             location.longitude
                             , location.latitude
@@ -273,6 +279,15 @@ internal class GeneralAppFragmentAdmin :
                 .show()
         }
     }
+
+    override fun authAction() =
+        Base64Factory
+            .createEncoder()
+            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
+                SharedPreferencesAuth.LOGIN_ID)}" +
+                    ":${sharedPreferencesAuth.actionWithAuth(
+                        SharedPreferencesAuth.PASSWORD_ID)}")
+                .toByteArray())
 
     companion object
     {

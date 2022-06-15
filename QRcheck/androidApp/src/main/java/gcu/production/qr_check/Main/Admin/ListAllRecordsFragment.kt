@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.navigation.Navigation
+import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qrcheck.StructureApp.NetworkActions
-import gcu.production.qrcheck.android.Authorization.Base64Encoder.encodeAuthDataToBase64Key
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Companion.DATA_SELECT_KEY
 import gcu.production.qr_check.android.R
@@ -29,6 +29,7 @@ internal class ListAllRecordsFragment
 {
     private lateinit var viewBinding: FragmentListAllRecordsBinding
     private lateinit var loadingDialog: CustomLoadingDialog
+    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +44,10 @@ internal class ListAllRecordsFragment
     {
         this.viewBinding =
             FragmentListAllRecordsBinding.inflate(layoutInflater)
+
+        this.sharedPreferencesAuth =
+            SharedPreferencesAuth(requireContext())
+
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
     }
@@ -84,8 +89,7 @@ internal class ListAllRecordsFragment
                 EngineSDK.restAPI.
                 restRecordRepository
                     .getAllRecord(
-                        SharedPreferencesAuth(
-                            requireContext()).encodeAuthDataToBase64Key()
+                        authAction()
                         , requireArguments().getLong(DATA_SELECT_KEY))
             }
 
@@ -119,4 +123,13 @@ internal class ListAllRecordsFragment
             ,R.string.toastMessageFaultConnection
             , Toast.LENGTH_SHORT)
             .show()
+
+    override fun authAction() =
+        Base64Factory
+            .createEncoder()
+            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
+                SharedPreferencesAuth.LOGIN_ID)}" +
+                    ":${sharedPreferencesAuth.actionWithAuth(
+                        SharedPreferencesAuth.PASSWORD_ID)}")
+                .toByteArray())
 }

@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DataPointOutputEntity(
-    val x: Double
-    , val y: Double
-    , val radius: Int
-    , val actualTime: String)
+    val x: Double? = null
+    , val y: Double? = null
+    , val radius: Int? = null
+    , val actualTime: String? = null)

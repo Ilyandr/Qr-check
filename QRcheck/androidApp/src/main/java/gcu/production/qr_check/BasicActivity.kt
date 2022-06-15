@@ -9,7 +9,6 @@ import gcu.production.qrcheck.RestAPI.AppConfiguration.Configuration
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.RestAPI.AppConfiguration.PlatformType
 
-
 internal class BasicActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?)

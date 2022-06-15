@@ -89,6 +89,8 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
                     else
                         R.id.actionLaunchRegistrationFragment
                     , sendFirstAuthData)
+
+
         }.start()
     }
 

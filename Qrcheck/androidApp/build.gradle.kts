@@ -11,7 +11,7 @@ android {
         minSdk = 22
         targetSdk = 32
         versionCode = 1
-        versionName = "1.0"
+        versionName = "Demo 1.0"
     }
 
     buildFeatures {

@@ -49,6 +49,7 @@ class KtorRestRecordDataSource(
                         parameter("pointId", pointId)
                     }
                 }.execute()
-                    .readText()) as MutableList<UserInputEntity>
+                    .readText())
+                .distinctBy { it.id } as MutableList<UserInputEntity>
         } catch (ex: Exception) { mutableListOf() }
 }

@@ -12,14 +12,15 @@ import java.util.concurrent.TimeUnit
 @DelicateCoroutinesApi
 internal object NetworkConnection
 {
+
     private var executor: ScheduledExecutorService? = null
     internal var isActiveConnectionListener = (executor != null)
 
     @JvmStatic
     internal inline fun checkingAccessWithActions(
-        crossinline actionSuccess: () -> Unit
-        , crossinline actionFault: () -> Unit
-        , actionsLoadingAfterAndBefore: Pair<Runnable, Runnable>? = null
+        crossinline actionSuccess: UnitFunction
+        , crossinline actionFault: UnitFunction
+        , actionsLoadingAfterAndBefore: PairRunnable = null
         , listenerForFailConnection: NetworkActions? = null) =
         GlobalScope.launch(Dispatchers.IO)
         {
@@ -78,3 +79,6 @@ internal object NetworkConnection
             }
     }
 }
+
+typealias UnitFunction = () -> Unit
+typealias PairRunnable = Pair<Runnable, Runnable>?
