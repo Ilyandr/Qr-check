@@ -67,7 +67,7 @@ struct GeneralAdminController: View
                                 , pointDateCreate: item.createTime!
                             )
                         }
-                    }.padding(.top, 32)
+                    }.padding(.top, 48)
                 }
                 .edgesIgnoringSafeArea(.all)
             }

@@ -1,17 +1,16 @@
-package gcu.production.qrcheck.android.Service
+package gcu.production.qr_check.Service
 
-import android.graphics.Bitmap
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal object BarcodeGenerator
+actual object BarcodeGenerator
 {
     @JvmStatic
-    internal suspend inline infix fun Pair<Int, Int>
-            .setCardBarcode(barcodeData: String?): Bitmap? =
+    actual suspend inline infix fun <reified T> Pair<Int, Int>
+            .setCardBarcode(barcodeData: String?): T? =
         withContext(Dispatchers.IO)
         {
             BarcodeEncoder()
@@ -23,5 +22,5 @@ internal object BarcodeGenerator
                         , this@setCardBarcode.second
                     )
                 )
-        }
+        } as T?
 }

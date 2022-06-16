@@ -15,11 +15,11 @@ import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
-import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Companion.DATA_SELECT_KEY
+import gcu.production.qr_check.Main.Admin.GeneralAppFragmentAdmin.Companion.DATA_SELECT_KEY
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterRecord
-import gcu.production.qrcheck.android.Service.NetworkConnection
 import gcu.production.qr_check.Service.DataStorageService
+import gcu.production.qr_check.Service.NetworkConnection
 import gcu.production.qr_check.android.databinding.FragmentListAllRecordsBinding
 import kotlinx.coroutines.*
 
@@ -128,8 +128,8 @@ internal class ListAllRecordsFragment
         Base64Factory
             .createEncoder()
             .encodeToString(("${dataStorageService.actionWithAuth(
-                DataStorageService.LOGIN_ID)}" +
+                DataStorageService.LOGIN_ID, null)}" +
                     ":${dataStorageService.actionWithAuth(
-                        DataStorageService.PASSWORD_ID)}")
+                        DataStorageService.PASSWORD_ID, null)}")
                 .toByteArray())
 }

@@ -1,4 +1,4 @@
-package gcu.production.qrcheck.android.Main.Admin
+package gcu.production.qr_check.Main.Admin
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -27,10 +27,10 @@ import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterPoint
-import gcu.production.qrcheck.android.Service.GeolocationListener
-import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
-import gcu.production.qrcheck.android.Service.NetworkConnection
+import gcu.production.qr_check.Service.GeolocationListener
+import gcu.production.qr_check.Service.GeolocationListener.Companion.checkPermissions
 import gcu.production.qr_check.Service.DataStorageService
+import gcu.production.qr_check.Service.NetworkConnection
 import gcu.production.qr_check.android.databinding.FragmentGeneralAppAdminBinding
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
@@ -284,9 +284,9 @@ internal class GeneralAppFragmentAdmin :
         Base64Factory
             .createEncoder()
             .encodeToString(("${dataStorageService.actionWithAuth(
-                DataStorageService.LOGIN_ID)}" +
+                DataStorageService.LOGIN_ID, null)}" +
                     ":${dataStorageService.actionWithAuth(
-                        DataStorageService.PASSWORD_ID)}")
+                        DataStorageService.PASSWORD_ID, null)}")
                 .toByteArray())
 
     companion object

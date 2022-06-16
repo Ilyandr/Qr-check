@@ -37,8 +37,4 @@ android {
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
     implementation("com.google.android.gms:play-services-vision-common:19.1.3")
     implementation("com.google.android.gms:play-services-vision:20.1.3@aar")
-    implementation("com.google.android.gms:play-services-location:20.0.0")
-
-    implementation("com.google.zxing:core:3.4.1")
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0@aar")
 }

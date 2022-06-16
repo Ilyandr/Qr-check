@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/generalAppFragmentAdmin"
-        android:name="gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin"
+        android:name="gcu.production.qr_check.Main.Admin.GeneralAppFragmentAdmin"
         android:label="fragment_general_app_admin"
         tools:layout="@layout/fragment_general_app_admin" >
 

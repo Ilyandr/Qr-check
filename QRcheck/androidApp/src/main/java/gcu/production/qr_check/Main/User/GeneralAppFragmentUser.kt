@@ -19,10 +19,10 @@ import gcu.production.qrcheck.StructureApp.NetworkActions
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Detectors.BarcodeDetectorService
-import gcu.production.qrcheck.android.Service.GeolocationListener
-import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
-import gcu.production.qrcheck.android.Service.NetworkConnection
+import gcu.production.qr_check.Service.GeolocationListener
+import gcu.production.qr_check.Service.GeolocationListener.Companion.checkPermissions
 import gcu.production.qr_check.Service.DataStorageService
+import gcu.production.qr_check.Service.NetworkConnection
 import gcu.production.qr_check.android.databinding.FragmentGeneralAppUserBinding
 import kotlinx.coroutines.*
 
@@ -165,9 +165,9 @@ internal class GeneralAppFragmentUser
         Base64Factory
             .createEncoder()
             .encodeToString(("${dataStorageService.actionWithAuth(
-                DataStorageService.LOGIN_ID)}" +
+                DataStorageService.LOGIN_ID, null)}" +
                     ":${dataStorageService.actionWithAuth(
-                        DataStorageService.PASSWORD_ID)}")
+                        DataStorageService.PASSWORD_ID, null)}")
                 .toByteArray())
 
     override fun onDestroy()

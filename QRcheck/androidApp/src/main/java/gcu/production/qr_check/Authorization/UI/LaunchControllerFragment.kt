@@ -52,11 +52,11 @@ internal class LaunchControllerFragment : Fragment(), GeneralStructure
                             .findNavController(bindingView.root)
                             .navigate(
                                 if (!dataStorageService.actionWithAuth(
-                                        DataStorageService.LOGIN_ID).isNullOrEmpty()
+                                        DataStorageService.LOGIN_ID, null).isNullOrEmpty()
                                     && !dataStorageService.actionWithAuth(
-                                        DataStorageService.PASSWORD_ID).isNullOrEmpty())
+                                        DataStorageService.PASSWORD_ID, null).isNullOrEmpty())
                                     (if (dataStorageService.actionWithAuth(
-                                           DataStorageService.ROLE_ID)
+                                           DataStorageService.ROLE_ID, null)
                                        == requireContext().getString(R.string.roleID0))
                                        R.id.primaryLaunchGeneralFragmentUser
                                    else

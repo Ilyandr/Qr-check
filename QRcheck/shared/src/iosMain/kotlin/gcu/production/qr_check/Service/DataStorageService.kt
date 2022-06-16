@@ -1,12 +1,22 @@
 package gcu.production.qr_check.Service
 
+import platform.Foundation.NSUserDefaults
+import platform.Foundation.setValue
+import platform.Foundation.valueForKey
+
 actual class DataStorageService
 {
-    val x: NSUserDefault
-    actual fun actionWithAuth(dataID: String, newValue: String?): String?
-    {
-        NSUserDefault
-    }
+    private val basicDataController =
+        NSUserDefaults.standardUserDefaults()
+
+    actual fun actionWithAuth(dataID: String, newValue: String?): String? =
+        newValue?.let {
+            this.basicDataController
+                .setValue(it, forKey = dataID)
+            it
+        } ?:
+        this.basicDataController
+            .valueForKey(dataID) as? String
 
     actual companion object
     {

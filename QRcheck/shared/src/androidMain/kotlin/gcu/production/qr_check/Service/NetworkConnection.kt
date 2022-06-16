@@ -1,27 +1,28 @@
-package gcu.production.qrcheck.android.Service
+package gcu.production.qr_check.Service
 
 import gcu.production.qrcheck.StructureApp.NetworkActions
-import kotlinx.coroutines.*
-import java.lang.Runnable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-@DelicateCoroutinesApi
-internal object NetworkConnection
+actual object NetworkConnection
 {
-
-    private var executor: ScheduledExecutorService? = null
-    internal var isActiveConnectionListener = (executor != null)
+    var executor: ScheduledExecutorService? = null
+    var isActiveConnectionListener = (executor != null)
 
     @JvmStatic
-    internal inline fun checkingAccessWithActions(
+    actual inline fun checkingAccessWithActions(
         crossinline actionSuccess: UnitFunction
         , crossinline actionFault: UnitFunction
-        , actionsLoadingAfterAndBefore: PairRunnable = null
-        , listenerForFailConnection: NetworkActions? = null) =
+        , actionsLoadingAfterAndBefore: PairRunnable
+        , listenerForFailConnection: NetworkActions?)
+    {
         GlobalScope.launch(Dispatchers.IO)
         {
             try
@@ -68,15 +69,16 @@ internal object NetworkConnection
                                 Executors.newSingleThreadScheduledExecutor()
 
                             executor!!.scheduleAtFixedRate(
-                                    { it.launchWithCheckNetworkConnection() }
-                                    , 0
-                                    , 2000
-                                    , TimeUnit.MILLISECONDS
-                                )
+                                { it.launchWithCheckNetworkConnection() }
+                                , 0
+                                , 2000
+                                , TimeUnit.MILLISECONDS
+                            )
                         }
                     } ?: actionsLoadingAfterAndBefore?.second?.run()
                 }
             }
+        }
     }
 }
 

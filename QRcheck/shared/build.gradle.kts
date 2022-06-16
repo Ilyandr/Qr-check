@@ -55,10 +55,16 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.6.1")
                 api("io.ktor:ktor-client-okhttp:${ktorVersion}")
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
                 api("com.squareup.sqldelight:android-driver:${sqlDelightVersion}")
+
+                implementation("com.google.android.material:material:1.6.1")
+                implementation("com.google.android.gms:play-services-vision-common:19.1.3")
+                implementation("com.google.android.gms:play-services-vision:20.1.3@aar")
+                implementation("com.google.android.gms:play-services-location:20.0.0")
+                implementation("com.google.zxing:core:3.4.1")
+                implementation("com.journeyapps:zxing-android-embedded:4.3.0@aar")
             }
         }
         val androidTest by getting {

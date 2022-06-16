@@ -1,4 +1,4 @@
-package gcu.production.qrcheck.android.Service
+package gcu.production.qr_check.Service
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -15,14 +15,12 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.OnTokenCanceledListener
-import gcu.production.qr_check.android.R
-import kotlinx.coroutines.DelicateCoroutinesApi
+import gcu.production.qr_check.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@DelicateCoroutinesApi
-internal class GeolocationListener(
+actual class GeolocationListener(
     private val context: Context
     , private val locationAction: (location: Location) -> Unit
     , private val actionFault: Runnable? = null)
@@ -31,7 +29,7 @@ internal class GeolocationListener(
         LocationServices.getFusedLocationProviderClient(context)
 
     @SuppressLint("MissingPermission")
-    fun launch(actionForFault: (() -> Unit)? = null)
+    actual fun launch(actionForFault: (() -> Unit)?)
     {
         if (!(this.context.getSystemService(
                 Context.LOCATION_SERVICE) as LocationManager)

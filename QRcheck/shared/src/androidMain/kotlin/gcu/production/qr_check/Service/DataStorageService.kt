@@ -27,8 +27,8 @@ actual class DataStorageService(context: Context)
 
     actual companion object
     {
-        actual const val LOGIN_ID = "login"
-        actual const val PASSWORD_ID = "password"
-        actual const val ROLE_ID = "role"
+        actual val LOGIN_ID = "login"
+        actual val PASSWORD_ID = "password"
+        actual val ROLE_ID = "role"
     }
 }

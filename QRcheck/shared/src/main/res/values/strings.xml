@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alertDialogOnGPS">Для сканирования QR-кода необходимо включить геолокацию</string>
+    <string name="infoAlertDialog">Уведомление</string>
+    <string name="btnTextRegisterChangeStage">Далее</string>
+    <string name="infoCloseAlert">Отмена</string>
+</resources>
