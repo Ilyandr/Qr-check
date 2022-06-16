@@ -60,7 +60,7 @@ struct ContentView: View
                 .padding(.top, -25)
 
                 
-                NavigationLink(destination: ConfirmController(), isActive: $startNavigateConfirm) {}
+                NavigationLink(destination: GeneralAdminController(), isActive: $startNavigateConfirm) {}
                 
                 NavigationLink(destination: RegistrationController(), isActive: $startNavigateRegister) {}
                 
@@ -93,6 +93,8 @@ struct ContentView: View
     
     private func launchAuth(inputLogin: String)
     {
+        startNavigateConfirm = true
+        return
         let dataCheckData = KotlinArray<NSString>(
             size: 1,
             init: { index in inputLogin as NSString })

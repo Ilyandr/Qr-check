@@ -15,6 +15,9 @@
 		B56408CB28560C1A00F76705 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56408CA28560C1A00F76705 /* RegistrationController.swift */; };
 		B56B7B7028574F0600673FA3 /* CustomLoadingDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B7B6F28574F0600673FA3 /* CustomLoadingDialog.swift */; };
 		B56B7B7228578CC700673FA3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B7B7128578CC700673FA3 /* Toast.swift */; };
+		B5BB3834285A577300532896 /* GeneralAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3833285A577300532896 /* GeneralAdminViewController.swift */; };
+		B5BB3838285A598900532896 /* CustomListViewAdapterPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */; };
+		B5BB383A285A66CC00532896 /* KotlinByteArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3839285A66CC00532896 /* KotlinByteArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +44,9 @@
 		B56408CA28560C1A00F76705 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		B56B7B6F28574F0600673FA3 /* CustomLoadingDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingDialog.swift; sourceTree = "<group>"; };
 		B56B7B7128578CC700673FA3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		B5BB3833285A577300532896 /* GeneralAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAdminViewController.swift; sourceTree = "<group>"; };
+		B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListViewAdapterPoint.swift; sourceTree = "<group>"; };
+		B5BB3839285A66CC00532896 /* KotlinByteArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				B5BB3835285A596500532896 /* Service */,
 				B56B7B6E28574EB500673FA3 /* GeneralAppUI */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				B56408C628560B3400F76705 /* Controllers */,
@@ -103,6 +110,7 @@
 		B56408C628560B3400F76705 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B5BB3831285A56DF00532896 /* Main */,
 				B56408C728560B7E00F76705 /* Authorization */,
 			);
 			path = Controllers;
@@ -124,6 +132,39 @@
 				B56B7B7128578CC700673FA3 /* Toast.swift */,
 			);
 			path = GeneralAppUI;
+			sourceTree = "<group>";
+		};
+		B5BB3831285A56DF00532896 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB3832285A574400532896 /* Admin */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B5BB3832285A574400532896 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB3833285A577300532896 /* GeneralAdminViewController.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		B5BB3835285A596500532896 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB3836285A596E00532896 /* Adapters */,
+				B5BB3839285A66CC00532896 /* KotlinByteArray.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B5BB3836285A596E00532896 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */,
+			);
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,10 +259,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BB3838285A598900532896 /* CustomListViewAdapterPoint.swift in Sources */,
 				B56B7B7028574F0600673FA3 /* CustomLoadingDialog.swift in Sources */,
 				B56B7B7228578CC700673FA3 /* Toast.swift in Sources */,
+				B5BB383A285A66CC00532896 /* KotlinByteArray.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				B56408C928560BF600F76705 /* ConfirmController.swift in Sources */,
+				B5BB3834285A577300532896 /* GeneralAdminViewController.swift in Sources */,
 				B56408CB28560C1A00F76705 /* RegistrationController.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
