@@ -30,7 +30,7 @@ import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterPoin
 import gcu.production.qrcheck.android.Service.GeolocationListener
 import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
 import gcu.production.qrcheck.android.Service.NetworkConnection
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.android.databinding.FragmentGeneralAppAdminBinding
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
@@ -42,7 +42,7 @@ internal class GeneralAppFragmentAdmin :
     private lateinit var viewBinding: FragmentGeneralAppAdminBinding
     private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var geolocationListener: GeolocationListener
-    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
+    private lateinit var dataStorageService: DataStorageService
     private lateinit var animSelected: Animation
 
     private var radius: Int? = null
@@ -62,8 +62,8 @@ internal class GeneralAppFragmentAdmin :
         this.viewBinding =
             FragmentGeneralAppAdminBinding.inflate(layoutInflater)
 
-        this.sharedPreferencesAuth =
-            SharedPreferencesAuth(requireContext())
+        this.dataStorageService =
+            DataStorageService(requireContext())
 
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
@@ -283,10 +283,10 @@ internal class GeneralAppFragmentAdmin :
     override fun authAction() =
         Base64Factory
             .createEncoder()
-            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
-                SharedPreferencesAuth.LOGIN_ID)}" +
-                    ":${sharedPreferencesAuth.actionWithAuth(
-                        SharedPreferencesAuth.PASSWORD_ID)}")
+            .encodeToString(("${dataStorageService.actionWithAuth(
+                DataStorageService.LOGIN_ID)}" +
+                    ":${dataStorageService.actionWithAuth(
+                        DataStorageService.PASSWORD_ID)}")
                 .toByteArray())
 
     companion object

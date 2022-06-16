@@ -16,7 +16,7 @@ import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
 import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
@@ -98,17 +98,17 @@ internal class ConfirmationFragment : Fragment(), GeneralStructure
         GlobalScope.launch(Dispatchers.Main)
         {
             sendAuthData.await()?.let {
-                val sharedPreferencesAuth =
-                    SharedPreferencesAuth(requireActivity())
+                val dataStorageService =
+                    DataStorageService(requireActivity())
 
-                sharedPreferencesAuth.actionWithAuth(
-                    SharedPreferencesAuth.PASSWORD_ID
+                dataStorageService.actionWithAuth(
+                    DataStorageService.PASSWORD_ID
                     , viewBinding.inputPassword.text.toString())
-                sharedPreferencesAuth.actionWithAuth(
-                    SharedPreferencesAuth.LOGIN_ID
+                dataStorageService.actionWithAuth(
+                    DataStorageService.LOGIN_ID
                     , it.phone)
-                sharedPreferencesAuth.actionWithAuth(
-                    SharedPreferencesAuth.ROLE_ID
+                dataStorageService.actionWithAuth(
+                    DataStorageService.ROLE_ID
                     , it.roles?.get(0))
 
                 Navigation

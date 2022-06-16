@@ -15,9 +15,9 @@ import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.RestAPI.Models.User.UserOutputEntity
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth.Companion.LOGIN_ID
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth.Companion.PASSWORD_ID
+import gcu.production.qr_check.Service.DataStorageService
+import gcu.production.qr_check.Service.DataStorageService.Companion.LOGIN_ID
+import gcu.production.qr_check.Service.DataStorageService.Companion.PASSWORD_ID
 import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.GeneralAppUI.PopupMenuCreator
@@ -122,17 +122,17 @@ internal class RegistrationFragment : Fragment(), GeneralStructure
         GlobalScope.launch(Dispatchers.Main)
         {
             sendRegisterData.await()?.let {
-                val sharedPreferencesAuth =
-                    SharedPreferencesAuth(requireActivity())
+                val dataStorageService =
+                    DataStorageService(requireActivity())
 
-                sharedPreferencesAuth.actionWithAuth(
+                dataStorageService.actionWithAuth(
                     PASSWORD_ID
                     , viewBinding.inputPassword.text.toString())
-                sharedPreferencesAuth.actionWithAuth(
+                dataStorageService.actionWithAuth(
                     LOGIN_ID
                     , it.phone)
-                sharedPreferencesAuth.actionWithAuth(
-                    SharedPreferencesAuth.ROLE_ID
+                dataStorageService.actionWithAuth(
+                    DataStorageService.ROLE_ID
                     , it.roles?.get(0))
 
                 Navigation

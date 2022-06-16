@@ -18,7 +18,7 @@ import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Compani
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.BarcodeGenerator.setCardBarcode
 import gcu.production.qrcheck.android.Service.NetworkConnection
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.android.databinding.FragmentShowQRBinding
 import kotlinx.coroutines.*
 import java.util.concurrent.Executors
@@ -31,7 +31,7 @@ internal class FragmentShowQR
     private lateinit var viewBinding: FragmentShowQRBinding
     private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var basicAnimation: Animation
-    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
+    private lateinit var dataStorageService: DataStorageService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +50,8 @@ internal class FragmentShowQR
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
 
-        this.sharedPreferencesAuth =
-            SharedPreferencesAuth(requireContext())
+        this.dataStorageService =
+            DataStorageService(requireContext())
 
         this.basicAnimation =
             AnimationUtils.loadAnimation(
@@ -143,9 +143,9 @@ internal class FragmentShowQR
     override fun authAction() =
         Base64Factory
             .createEncoder()
-            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
-                SharedPreferencesAuth.LOGIN_ID)}" +
-                    ":${sharedPreferencesAuth.actionWithAuth(
-                        SharedPreferencesAuth.PASSWORD_ID)}")
+            .encodeToString(("${dataStorageService.actionWithAuth(
+                DataStorageService.LOGIN_ID)}" +
+                    ":${dataStorageService.actionWithAuth(
+                        DataStorageService.PASSWORD_ID)}")
                 .toByteArray())
 }

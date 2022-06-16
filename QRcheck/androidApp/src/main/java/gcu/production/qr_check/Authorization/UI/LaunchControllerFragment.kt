@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import gcu.production.qr_check.android.databinding.FragmentLaunchControllerBinding
 import gcu.production.qrcheck.StructureApp.GeneralStructure
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.android.R
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -39,8 +39,8 @@ internal class LaunchControllerFragment : Fragment(), GeneralStructure
 
     override fun basicBehavior()
     {
-        val sharedPreferencesAuth =
-            SharedPreferencesAuth(requireContext())
+        val dataStorageService =
+            DataStorageService(requireContext())
 
         Executors
             .newSingleThreadScheduledExecutor()
@@ -51,12 +51,12 @@ internal class LaunchControllerFragment : Fragment(), GeneralStructure
                         Navigation
                             .findNavController(bindingView.root)
                             .navigate(
-                                if (!sharedPreferencesAuth.actionWithAuth(
-                                        SharedPreferencesAuth.LOGIN_ID).isNullOrEmpty()
-                                    && !sharedPreferencesAuth.actionWithAuth(
-                                        SharedPreferencesAuth.PASSWORD_ID).isNullOrEmpty())
-                                    (if (sharedPreferencesAuth.actionWithAuth(
-                                           SharedPreferencesAuth.ROLE_ID)
+                                if (!dataStorageService.actionWithAuth(
+                                        DataStorageService.LOGIN_ID).isNullOrEmpty()
+                                    && !dataStorageService.actionWithAuth(
+                                        DataStorageService.PASSWORD_ID).isNullOrEmpty())
+                                    (if (dataStorageService.actionWithAuth(
+                                           DataStorageService.ROLE_ID)
                                        == requireContext().getString(R.string.roleID0))
                                        R.id.primaryLaunchGeneralFragmentUser
                                    else

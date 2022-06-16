@@ -19,7 +19,7 @@ import gcu.production.qrcheck.android.Main.Admin.GeneralAppFragmentAdmin.Compani
 import gcu.production.qr_check.android.R
 import gcu.production.qrcheck.android.Service.Adapters.CustomListViewAdapterRecord
 import gcu.production.qrcheck.android.Service.NetworkConnection
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.android.databinding.FragmentListAllRecordsBinding
 import kotlinx.coroutines.*
 
@@ -29,7 +29,7 @@ internal class ListAllRecordsFragment
 {
     private lateinit var viewBinding: FragmentListAllRecordsBinding
     private lateinit var loadingDialog: CustomLoadingDialog
-    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
+    private lateinit var dataStorageService: DataStorageService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +45,8 @@ internal class ListAllRecordsFragment
         this.viewBinding =
             FragmentListAllRecordsBinding.inflate(layoutInflater)
 
-        this.sharedPreferencesAuth =
-            SharedPreferencesAuth(requireContext())
+        this.dataStorageService =
+            DataStorageService(requireContext())
 
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
@@ -127,9 +127,9 @@ internal class ListAllRecordsFragment
     override fun authAction() =
         Base64Factory
             .createEncoder()
-            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
-                SharedPreferencesAuth.LOGIN_ID)}" +
-                    ":${sharedPreferencesAuth.actionWithAuth(
-                        SharedPreferencesAuth.PASSWORD_ID)}")
+            .encodeToString(("${dataStorageService.actionWithAuth(
+                DataStorageService.LOGIN_ID)}" +
+                    ":${dataStorageService.actionWithAuth(
+                        DataStorageService.PASSWORD_ID)}")
                 .toByteArray())
 }

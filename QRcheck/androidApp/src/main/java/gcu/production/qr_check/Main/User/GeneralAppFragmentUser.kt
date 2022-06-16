@@ -22,7 +22,7 @@ import gcu.production.qrcheck.android.Service.Detectors.BarcodeDetectorService
 import gcu.production.qrcheck.android.Service.GeolocationListener
 import gcu.production.qrcheck.android.Service.GeolocationListener.Companion.checkPermissions
 import gcu.production.qrcheck.android.Service.NetworkConnection
-import gcu.production.qrcheck.android.Service.SharedPreferencesAuth
+import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.android.databinding.FragmentGeneralAppUserBinding
 import kotlinx.coroutines.*
 
@@ -33,7 +33,7 @@ internal class GeneralAppFragmentUser
     private lateinit var viewBinding: FragmentGeneralAppUserBinding
     private lateinit var barcodeDetectorService: BarcodeDetectorService
     private lateinit var geolocationListener: GeolocationListener
-    private lateinit var sharedPreferencesAuth: SharedPreferencesAuth
+    private lateinit var dataStorageService: DataStorageService
     private lateinit var loadingDialog: CustomLoadingDialog
     private lateinit var animSelected: Animation
     private var barcodeCompleteInfo: String? = null
@@ -55,8 +55,8 @@ internal class GeneralAppFragmentUser
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
 
-        this.sharedPreferencesAuth =
-            SharedPreferencesAuth(requireContext())
+        this.dataStorageService =
+            DataStorageService(requireContext())
 
         this.animSelected =
             AnimationUtils.loadAnimation(
@@ -164,10 +164,10 @@ internal class GeneralAppFragmentUser
     override fun authAction() =
         Base64Factory
             .createEncoder()
-            .encodeToString(("${sharedPreferencesAuth.actionWithAuth(
-                SharedPreferencesAuth.LOGIN_ID)}" +
-                    ":${sharedPreferencesAuth.actionWithAuth(
-                        SharedPreferencesAuth.PASSWORD_ID)}")
+            .encodeToString(("${dataStorageService.actionWithAuth(
+                DataStorageService.LOGIN_ID)}" +
+                    ":${dataStorageService.actionWithAuth(
+                        DataStorageService.PASSWORD_ID)}")
                 .toByteArray())
 
     override fun onDestroy()

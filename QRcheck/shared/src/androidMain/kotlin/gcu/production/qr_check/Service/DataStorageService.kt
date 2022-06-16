@@ -1,9 +1,9 @@
-package gcu.production.qrcheck.android.Service
+package gcu.production.qr_check.Service
 
 import android.content.Context
 import android.content.SharedPreferences
 
-internal class SharedPreferencesAuth(context: Context)
+actual class DataStorageService(context: Context)
 {
     private val sharedPreferences: SharedPreferences
 
@@ -14,10 +14,10 @@ internal class SharedPreferencesAuth(context: Context)
                 null, Context.MODE_PRIVATE)
     }
 
-    fun actionWithAuth(
+    actual fun actionWithAuth(
         dataID: String
-        , newValue: String? = null): String? =
-        newValue?.let {
+        , newValue: String?): String? =
+        newValue.let {
             this.sharedPreferences
                 .edit()
                 .putString(dataID, it)
@@ -25,10 +25,10 @@ internal class SharedPreferencesAuth(context: Context)
             return@let it
         } ?: this.sharedPreferences.getString(dataID, null)
 
-    companion object
+    actual companion object
     {
-        const val LOGIN_ID = "login"
-        const val PASSWORD_ID = "password"
-        internal const val ROLE_ID = "role"
+        actual const val LOGIN_ID = "login"
+        actual const val PASSWORD_ID = "password"
+        actual const val ROLE_ID = "role"
     }
 }
