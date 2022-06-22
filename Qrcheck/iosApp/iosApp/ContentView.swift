@@ -10,6 +10,7 @@ struct ContentView: View
     @State var startNavigateConfirm = false
     @State var showToastMsg = false
     
+
     var body: some View
     {
         ZStack {
@@ -19,7 +20,7 @@ struct ContentView: View
                     .font(.title2)
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
-                    .padding(.top, -90.0)
+                    .padding(.top, 32.0)
                 
                 
                 Text("Введённый вами номер телефона будет использован для дальнейшнего входа")
@@ -27,7 +28,7 @@ struct ContentView: View
                     .foregroundColor(Color.gray)
                     .multilineTextAlignment(.center)
                     .padding([.leading, .bottom, .trailing], 32.0)
-                    .padding(.top, -75.0)
+                    .padding(.top, 1.0)
                 
                 HStack
                 {
@@ -60,12 +61,33 @@ struct ContentView: View
                 .padding(.top, -25)
 
                 
-                NavigationLink(destination: GeneralAdminController(), isActive: $startNavigateConfirm) {}
+                NavigationLink(
+                    destination: ConfirmController(
+                        loginData: self.username)
+                    , isActive: $startNavigateConfirm) {}
                 
-                NavigationLink(destination: RegistrationController(), isActive: $startNavigateRegister) {}
+                NavigationLink(
+                    destination: RegistrationController(
+                        loginData: self.username)
+                    , isActive: $startNavigateRegister) {}
                 
                 
-                Button(action: { launchAuth(inputLogin: username)}
+                Button(action: {
+                    NetworkConnection
+                        .shared
+                        .checkingAccessWithActions(
+                        actionSuccess: { launchAuth(inputLogin: username) }
+                        , actionFault: { showToastMsg = true }
+                        , actionsLoadingAfterAndBefore: KotlinPair(
+                            first:KotlinRunnable(
+                                actionInit: { showLoadingDialog = true }
+                            )
+                            , second: KotlinRunnable(
+                                actionInit: {showLoadingDialog = false}
+                            )
+                        ), listenerForFailConnection: nil
+                    )
+                }
                         , label: {
                     Text("Войти")
                         .font(.callout)
@@ -77,27 +99,30 @@ struct ContentView: View
                 .cornerRadius(10)
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .padding()
-        }
             }
+            .navigationBarHidden(true)
+        }
             .toast(
                 message: "Ошибка - введены неверные данные или отсутствует интернет-соеденение"
                 , isShowing: $showToastMsg
                 , duration: Toast.short)
             
-            if showLoadingDialog
-            {
-            CustomLoadingDialog(show: $showLoadingDialog, placeHolder: "Загрузка данных")
+            if showLoadingDialog {
+                CustomLoadingDialog(
+                    show: $showLoadingDialog
+                    , placeHolder: "Загрузка данных"
+                )
             }
-    }.edgesIgnoringSafeArea(.all)
-    }
-    
+        }
+            .navigationBarHidden(true)
+}
+   
     private func launchAuth(inputLogin: String)
     {
-        startNavigateConfirm = true
-        return
         let dataCheckData = KotlinArray<NSString>(
             size: 1,
-            init: { index in inputLogin as NSString })
+            init: { index in inputLogin as NSString }
+        )
                                    
         DataCorrectness().checkInputUserData(
             selectedAction: DataCorrectness().LOGIN_ACTION
@@ -126,7 +151,8 @@ struct ContentView: View
                         startNavigateRegister = true
                     }
                     showLoadingDialog = false
-                })            }
+                })
+            }
             , actionForFault: { showToastMsg = true }
         )
     }

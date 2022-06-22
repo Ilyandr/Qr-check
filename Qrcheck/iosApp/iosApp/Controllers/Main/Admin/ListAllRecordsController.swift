@@ -1,14 +1,20 @@
 import SwiftUI
 import shared
 
-
-struct GeneralAdminController: View
+struct ListAllRecordsController: View
 {
+    @State private var pointId: Int64
     @State private var showToastMsg = false
     @State private var showLoadingDialog = false
-    @ObservedObject var viewModel = ListViewModel()
+    @State private var startShowQRCode = false
+    
+    @ObservedObject var viewModel = ListViewModelRecords()
     private let dataStorageService = DataStorageService()
 
+    
+    init(pointId: Int64) {
+        self.pointId = pointId
+    }
     
     func networkFaultConnection() {
        showToastMsg = false
@@ -43,15 +49,16 @@ struct GeneralAdminController: View
                 actionSuccess: {
                     EngineSDK()
                         .restAPI
-                        .restPointRepository
-                        .getAllPoint(
-                            userLoginKey: authAction()
+                        .restRecordRepository
+                        .getAllRecord(
+                            userAuthKey: authAction()
+                            , pointId: self.pointId
                             , completionHandler: {
                                 response, error in
                                 response?.forEach(
                                     { singleItem in
                                         viewModel.addSingleItem(
-                                            item: singleItem as! DataPointInputEntity)
+                                            item: singleItem as! UserInputEntity)
                                     }
                                 )
                             })
@@ -82,72 +89,38 @@ struct GeneralAdminController: View
                        {
                            ForEach(viewModel.listItems, id: \.self)
                            { item in
-                               singleItemListPoint(
-                                   pointId: Int64(truncating: item.id!)
-                                   , pointDateCreate: item.createTime!
-                               )
+                               singleItemListRecord(
+                                userName: item.name!
+                                , timeScan: item.time!
+                             )
                            }
                        }.padding(.top, 6.0)
                        
+                       NavigationLink(
+                           destination: ShowQRController(
+                            selectPointId: self.pointId)
+                           , isActive: $startShowQRCode) {}
+                       
                        TabView
                        {
-                           HStack
-                           {
-                               Button(
-                                action: { objectsInit() }
-                                , label: {
-                                    VStack
-                                    {
-                                        Image("list")
-                                            .resizable()
-                                            .frame(minWidth: 24, idealWidth: 24, maxWidth: 24, minHeight: 24, idealHeight: 24, maxHeight: 24, alignment: .center)
-                                            .scaledToFit()
-                                        
-                                        Text("Данные")
-                                            .font(.system(size: 10))
-                                            .padding(.bottom, 8)
-                                    }
-                                }).scaleEffect(0.85)
-                                   .padding(.top, 42)
-                           
-                               Divider().padding(.horizontal, 30)
-
-                               Button(
-                                action: {}
-                                , label: {
-                                    VStack
-                                    {
-                                        Image("add")
-                                            .resizable()
-                                            .frame(minWidth: 24, idealWidth: 24, maxWidth: 24, minHeight: 24, idealHeight: 24, maxHeight: 24, alignment: .center)
-                                            .scaledToFit()
-                                        
-                                        Text("Создать")
-                                            .font(.system(size: 10))
-                                            .padding(.bottom, 8)
-                                    }
-                                }).scaleEffect(0.85)
-                                   .padding(.top, 42)
-                               
-                               Divider().padding(.horizontal, 30)
-                               
                            Button(
-                            action: {}
+                            action: { self.startShowQRCode = true }
                             , label: {
                                 VStack
                                 {
-                                    Image("settings")
+                                    Image("qrCode")
                                         .resizable()
                                         .frame(minWidth: 24, idealWidth: 24, maxWidth: 24, minHeight: 24, idealHeight: 24, maxHeight: 24, alignment: .center)
                                         .scaledToFit()
                                     
-                                    Text("Опции")
+                                    Text("Данные")
                                         .font(.system(size: 10))
                                         .padding(.bottom, 8)
                                 }
-                            }).scaleEffect(0.85)
+                            })
+                           .scaleEffect(0.85)
                                .padding(.top, 42)
-                           }.navigationBarHidden(true)
+                               .navigationBarHidden(true)
                    }.frame(height: 40)
                 }
                }
@@ -167,12 +140,10 @@ struct GeneralAdminController: View
        }
 }
 
-    struct GeneralAdminViewController_Previews: PreviewProvider
+struct ListAllRecordsController_Previews: PreviewProvider
+{
+    static var previews: some View
     {
-        static var previews: some View
-        {
-            GeneralAdminController().body
-        }
+        ListAllRecordsController(pointId: 0).body
     }
-
-
+}

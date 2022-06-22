@@ -11,10 +11,16 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		B51EA9E7285F34E1003E6BDA /* BarcodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EA9E6285F34E1003E6BDA /* BarcodeGenerator.swift */; };
+		B55AFD6628626807003EBC4E /* KotlinRunnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AFD6528626807003EBC4E /* KotlinRunnable.swift */; };
 		B56408C928560BF600F76705 /* ConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56408C828560BF600F76705 /* ConfirmController.swift */; };
 		B56408CB28560C1A00F76705 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56408CA28560C1A00F76705 /* RegistrationController.swift */; };
 		B56B7B7028574F0600673FA3 /* CustomLoadingDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B7B6F28574F0600673FA3 /* CustomLoadingDialog.swift */; };
 		B56B7B7228578CC700673FA3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B7B7128578CC700673FA3 /* Toast.swift */; };
+		B5AF7F83286068BB004CB4E0 /* ListAllRecordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AF7F82286068BB004CB4E0 /* ListAllRecordsController.swift */; };
+		B5AF7F8528606BE0004CB4E0 /* CustomListViewAdapterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AF7F8428606BE0004CB4E0 /* CustomListViewAdapterRecord.swift */; };
+		B5B98E2B286345D30004A96F /* ShowQRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B98E2A286345D30004A96F /* ShowQRController.swift */; };
+		B5B9BC1B2862A25E00EC892E /* GeneralUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9BC1A2862A25E00EC892E /* GeneralUserController.swift */; };
 		B5BB3834285A577300532896 /* GeneralAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3833285A577300532896 /* GeneralAdminViewController.swift */; };
 		B5BB3838285A598900532896 /* CustomListViewAdapterPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */; };
 		B5BB383A285A66CC00532896 /* KotlinByteArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BB3839285A66CC00532896 /* KotlinByteArray.swift */; };
@@ -40,10 +46,16 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B51EA9E6285F34E1003E6BDA /* BarcodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeGenerator.swift; sourceTree = "<group>"; };
+		B55AFD6528626807003EBC4E /* KotlinRunnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinRunnable.swift; sourceTree = "<group>"; };
 		B56408C828560BF600F76705 /* ConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmController.swift; sourceTree = "<group>"; };
 		B56408CA28560C1A00F76705 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		B56B7B6F28574F0600673FA3 /* CustomLoadingDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingDialog.swift; sourceTree = "<group>"; };
 		B56B7B7128578CC700673FA3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		B5AF7F82286068BB004CB4E0 /* ListAllRecordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllRecordsController.swift; sourceTree = "<group>"; };
+		B5AF7F8428606BE0004CB4E0 /* CustomListViewAdapterRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListViewAdapterRecord.swift; sourceTree = "<group>"; };
+		B5B98E2A286345D30004A96F /* ShowQRController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRController.swift; sourceTree = "<group>"; };
+		B5B9BC1A2862A25E00EC892E /* GeneralUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUserController.swift; sourceTree = "<group>"; };
 		B5BB3833285A577300532896 /* GeneralAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAdminViewController.swift; sourceTree = "<group>"; };
 		B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListViewAdapterPoint.swift; sourceTree = "<group>"; };
 		B5BB3839285A66CC00532896 /* KotlinByteArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArray.swift; sourceTree = "<group>"; };
@@ -134,9 +146,18 @@
 			path = GeneralAppUI;
 			sourceTree = "<group>";
 		};
+		B5B9BC192862A24400EC892E /* User */ = {
+			isa = PBXGroup;
+			children = (
+				B5B9BC1A2862A25E00EC892E /* GeneralUserController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		B5BB3831285A56DF00532896 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B5B9BC192862A24400EC892E /* User */,
 				B5BB3832285A574400532896 /* Admin */,
 			);
 			path = Main;
@@ -146,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				B5BB3833285A577300532896 /* GeneralAdminViewController.swift */,
+				B5AF7F82286068BB004CB4E0 /* ListAllRecordsController.swift */,
+				B5B98E2A286345D30004A96F /* ShowQRController.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -155,6 +178,8 @@
 			children = (
 				B5BB3836285A596E00532896 /* Adapters */,
 				B5BB3839285A66CC00532896 /* KotlinByteArray.swift */,
+				B51EA9E6285F34E1003E6BDA /* BarcodeGenerator.swift */,
+				B55AFD6528626807003EBC4E /* KotlinRunnable.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -163,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B5BB3837285A598900532896 /* CustomListViewAdapterPoint.swift */,
+				B5AF7F8428606BE0004CB4E0 /* CustomListViewAdapterRecord.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -260,14 +286,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5BB3838285A598900532896 /* CustomListViewAdapterPoint.swift in Sources */,
+				B5B98E2B286345D30004A96F /* ShowQRController.swift in Sources */,
 				B56B7B7028574F0600673FA3 /* CustomLoadingDialog.swift in Sources */,
+				B5AF7F8528606BE0004CB4E0 /* CustomListViewAdapterRecord.swift in Sources */,
 				B56B7B7228578CC700673FA3 /* Toast.swift in Sources */,
 				B5BB383A285A66CC00532896 /* KotlinByteArray.swift in Sources */,
+				B5B9BC1B2862A25E00EC892E /* GeneralUserController.swift in Sources */,
+				B5AF7F83286068BB004CB4E0 /* ListAllRecordsController.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				B56408C928560BF600F76705 /* ConfirmController.swift in Sources */,
+				B51EA9E7285F34E1003E6BDA /* BarcodeGenerator.swift in Sources */,
 				B5BB3834285A577300532896 /* GeneralAdminViewController.swift in Sources */,
 				B56408CB28560C1A00F76705 /* RegistrationController.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				B55AFD6628626807003EBC4E /* KotlinRunnable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

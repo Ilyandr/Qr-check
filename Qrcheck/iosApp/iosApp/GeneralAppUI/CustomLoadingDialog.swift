@@ -16,17 +16,19 @@ struct CustomLoadingDialog: View
                         gradient: .init(
                             colors: [Color.primary, Color.primary.opacity(0)])
                         , center: .center))
-                .frame(width: 200, height: 200)
+                .frame(width: 125, height: 125)
                 .rotationEffect(.init(degrees: animate ? 360 : 0))
+                .padding(.all, 10)
             
             Text(placeHolder)
                 .fontWeight(.bold)
+                .padding(.all, 15)
         }
+        .background(BlurView())
+        .cornerRadius(12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.vertical, 25)
         .padding(.horizontal, 35)
-        .cornerRadius(20)
-        .background(BlurView())
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             Color.primary.opacity(0.35)
                 .onTapGesture {

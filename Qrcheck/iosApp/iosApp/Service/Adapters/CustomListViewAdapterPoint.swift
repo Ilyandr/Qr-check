@@ -4,21 +4,27 @@ import shared
 
 struct singleItemListPoint: View
 {
-    var pointId: Int
+    var pointId: Int64
     var pointDateCreate: String
     
     var body: some View
     {
-        HStack
-        {
-            Text("\(pointId)")
-                .padding(.horizontal, 12)
-                
-            Spacer()
-                
-            Text(pointDateCreate)
-                .padding(.horizontal, 12)
-        }
+        NavigationLink(
+            destination: ListAllRecordsController(pointId: self.pointId)
+            , label: {
+                HStack
+                {
+                    Text("\(pointId)")
+                        .padding(.horizontal, 12)
+                        
+                    Text("")
+                        .padding(.horizontal, 12)
+                        
+                    Text(pointDateCreate)
+                        .padding(.horizontal, 12)
+                }
+            }
+        )
     }
 }
 

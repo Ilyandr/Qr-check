@@ -6,10 +6,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-actual object BarcodeGenerator
+object BarcodeGenerator
 {
     @JvmStatic
-    actual suspend inline infix fun <reified T> Pair<Int, Int>
+    suspend inline infix fun <reified T> Pair<Int, Int>
             .setCardBarcode(barcodeData: String?): T? =
         withContext(Dispatchers.IO)
         {

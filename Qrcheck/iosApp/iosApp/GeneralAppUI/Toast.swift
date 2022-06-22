@@ -41,7 +41,7 @@ struct Toast: ViewModifier
       }
     }
     .padding(.horizontal, 16)
-    .padding(.bottom, 32)
+    .padding(.bottom, 96)
     .animation(config.animation, value: isShowing)
     .transition(config.transition)
   }
