@@ -17,7 +17,7 @@ actual class DataStorageService(context: Context)
     actual fun actionWithAuth(
         dataID: String
         , newValue: String?): String? =
-        newValue.let {
+        newValue?.let {
             this.sharedPreferences
                 .edit()
                 .putString(dataID, it)

@@ -101,8 +101,7 @@ struct ListAllRecordsController: View
                             selectPointId: self.pointId)
                            , isActive: $startShowQRCode) {}
                        
-                       TabView
-                       {
+                     
                            Button(
                             action: { self.startShowQRCode = true }
                             , label: {
@@ -121,7 +120,7 @@ struct ListAllRecordsController: View
                            .scaleEffect(0.85)
                                .padding(.top, 42)
                                .navigationBarHidden(true)
-                   }.frame(height: 40)
+                  // }.frame(height: 40)
                 }
                }
                if showLoadingDialog {

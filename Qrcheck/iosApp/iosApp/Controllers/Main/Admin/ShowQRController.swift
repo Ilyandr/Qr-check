@@ -3,7 +3,8 @@ import shared
 
 struct ShowQRController: View
 {
-    @State private var barcodeData: Data = Data()
+    @State private var barcodeData: Data =
+    generateBarcode(str: "")
     @State private var showLoadingDialog = false
     @State private var showToastMsg = false
     
@@ -85,10 +86,13 @@ struct ShowQRController: View
                     Image(
                         uiImage: UIImage(
                             data: self.barcodeData)!)
-                    Text("--")
+                    .resizable()
+                    .frame(minWidth: 100, idealWidth: 100, maxWidth: 100, minHeight: 100, idealHeight: 100, maxHeight: 100, alignment: .center)
+                    .scaledToFit().navigationBarHidden(true)
                 }
             }
-        }
+        }.onAppear {
+            objectsInit() }
     }
 }
 
