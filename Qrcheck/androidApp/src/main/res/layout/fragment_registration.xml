@@ -18,7 +18,6 @@
         app:fontFamily="@font/bandera_small_font"
         android:layout_weight="1"/>
 
-
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:text="@string/infoOutputRegister"
@@ -32,12 +31,17 @@
         android:fontFamily="@font/bandera_middle_font"
         android:layout_weight="1"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginEnd="12sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:background="@drawable/edit_text_form"
         android:orientation="horizontal"
         android:layout_gravity="center">
@@ -86,8 +90,8 @@
         android:gravity="left|center"
         android:paddingStart="12sp"
         android:layout_marginTop="6sp"
-        android:layout_marginEnd="12sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:hint="@string/nameInfoRegister"
         android:textSize="16sp"
         android:fontFamily="@font/bandera_small_font"
@@ -103,9 +107,9 @@
         android:layout_weight="1"
         android:gravity="left|center"
         android:paddingStart="12sp"
-        android:layout_marginEnd="12sp"
         android:layout_marginTop="6sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:hint="@string/jobTitleInfoRegister"
         android:textSize="16sp"
         android:fontFamily="@font/bandera_small_font"
@@ -121,9 +125,9 @@
         android:layout_weight="1"
         android:gravity="left|center"
         android:paddingStart="12sp"
-        android:layout_marginEnd="12sp"
         android:layout_marginTop="6sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:hint="@string/organizationInfoRegister"
         android:textSize="16sp"
         android:fontFamily="@font/bandera_small_font"
@@ -141,8 +145,8 @@
         android:inputType="textPassword"
         android:paddingStart="12sp"
         android:layout_marginTop="6sp"
-        android:layout_marginEnd="12sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:hint="@string/passwordInfoRegister"
         android:textSize="16sp"
         android:fontFamily="@font/bandera_small_font"
@@ -159,7 +163,9 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNextStage"
         android:layout_width="match_parent"
-        android:layout_margin="12sp"
+        android:layout_marginBottom="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:fontFamily="@font/bandera_small_font"
         android:textColorHint="@color/colorWhite"
         android:hint="@string/btnTextRegisterChangeStage"

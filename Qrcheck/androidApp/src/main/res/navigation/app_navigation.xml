@@ -49,7 +49,11 @@
         android:id="@+id/generalAppFragment"
         android:name="gcu.production.qrcheck.android.Main.User.GeneralAppFragmentUser"
         android:label="fragment_general_app"
-        tools:layout="@layout/fragment_general_app_user" />
+        tools:layout="@layout/fragment_general_app_user" >
+        <action
+            android:id="@+id/actionLaunchSettingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/launchControllerFragment"
         android:name="gcu.production.qrcheck.android.Authorization.UI.LaunchControllerFragment"
@@ -76,6 +80,9 @@
         <action
             android:id="@+id/actionLaunchListAllRecordsFragment"
             app:destination="@id/listAllRecordsFragment" />
+        <action
+            android:id="@+id/actionLaunchSettingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentShowQR"
@@ -91,4 +98,14 @@
             android:id="@+id/actionLaunchFragmentShowQR"
             app:destination="@id/fragmentShowQR" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="gcu.production.qr_check.Main.Settings.SettingsFragment"
+        android:label="fragment_settings_bar"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/actionExitAccount"
+            app:destination="@id/launchControllerFragment" />
+    </fragment>
+
 </navigation>

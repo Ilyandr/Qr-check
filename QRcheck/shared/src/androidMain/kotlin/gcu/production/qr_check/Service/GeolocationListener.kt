@@ -67,7 +67,7 @@ actual class GeolocationListener(
                     return this
                 }
 
-                override fun isCancellationRequested(): Boolean = true
+                override fun isCancellationRequested(): Boolean = false
             })
             .addOnSuccessListener {
                 GlobalScope.launch(Dispatchers.Main) {

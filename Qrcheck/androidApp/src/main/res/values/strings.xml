@@ -24,6 +24,7 @@
     <string name="toastErrorCheckLogin">Ошибка - введён некорректный номер телефона или отсутствует интернет-соединение</string>
     <string name="toastErrorCommonCheckData">Ошибка - введены некорректные данные</string>
     <string name="toastErrorPassword">Ошибка - введён неверный пароль от аккаунта или отсутствует интернет-соединение</string>
+    <string name="toastErrorNetwork">Ошибка - отсутствует интернет-соединение</string>
     <string name="infoPopupMenuRole0">Сотрудник</string>
     <string name="infoPopupMenuRole1">Работодатель</string>
     <string name="infoHintScanQR">Сканировать QR-код</string>
@@ -53,4 +54,15 @@
     <string name="toastMessageFaultConnection">Ошибка интернет-соеденения, проверьте ваше подключение</string>
     <string name="successPermissionInfo">Резрешения успешно предоставлены! Поворите выбранное действие</string>
     <string name="faultPermissionInfo">Ошибка - не предоставлены нужные разрешения</string>
+
+    <!-- Settings fragment key`s !-->
+    <string name="themeAppSettings">themeApp</string>
+    <string name="changeLoginSettings">changeLogin</string>
+    <string name="changePasswordSettings">changePassword</string>
+    <string name="changeOrganizationSettings">changeOrganization</string>
+    <string name="removeAccountSettings">removeAccount</string>
+    <string name="exitSettings">exit</string>
+    <string name="toastSuccessChangeTheme">Тема приложения успешно изменена</string>
+    <string name="titleAlertConfirm">Подтверждение</string>
+    <string name="msgAlertExitAccount">Вы точно хотите выйти из своего аккаунта?</string>
 </resources>

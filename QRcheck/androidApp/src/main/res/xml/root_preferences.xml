@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Интерфейс">
+        <SwitchPreference
+            app:key="@string/themeAppSettings"
+            app:title="Тёмная тема"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Аккаунт">
+        <Preference
+            app:key="@string/changeLoginSettings"
+            app:title="Изменить номер телефона" />
+
+        <Preference
+            app:key="@string/changePasswordSettings"
+            app:title="Изменить пароль" />
+
+        <Preference
+            app:key="@string/changeOrganizationSettings"
+            app:title="Поменять организацию" />
+
+        <Preference
+            app:key="@string/removeAccountSettings"
+            app:title="Удалить аккаунт" />
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+        <Preference
+            app:key="@string/exitSettings"
+            app:title="Выйти" />
+    </PreferenceCategory>
+</PreferenceScreen>

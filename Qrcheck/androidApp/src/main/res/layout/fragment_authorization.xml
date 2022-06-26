@@ -39,8 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginEnd="12sp"
-        android:layout_marginStart="12sp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
         android:background="@drawable/edit_text_form"
         android:orientation="horizontal"
         android:layout_gravity="center">
@@ -79,7 +79,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9.2"/>
+        android:layout_weight="9"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNextStage"
@@ -88,8 +88,8 @@
         android:textColorHint="@color/colorWhite"
         android:hint="@string/textNextStageRegister"
         android:layout_height="0dp"
-        android:layout_marginStart="12sp"
-        android:layout_marginEnd="12sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
         android:textSize="16sp"
         android:background="@drawable/general_complete_btn_form"
         android:layout_weight="1"/>

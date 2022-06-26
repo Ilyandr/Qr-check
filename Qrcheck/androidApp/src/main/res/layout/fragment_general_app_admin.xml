@@ -101,6 +101,7 @@
                 android:src="@drawable/settings_image_btn"/>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/settings"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/bandera_small_font"

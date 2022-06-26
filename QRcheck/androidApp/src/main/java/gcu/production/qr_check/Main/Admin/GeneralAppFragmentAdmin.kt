@@ -117,6 +117,13 @@ internal class GeneralAppFragmentAdmin :
                     R.id.actionLaunchListAllRecordsFragment
                     , bundleSendData)
         }
+
+        this.viewBinding.settings.setOnClickListener {
+            it.startAnimation(this.animSelected)
+            Navigation
+                .findNavController(this.viewBinding.root)
+                .navigate(R.id.actionLaunchSettingsFragment)
+        }
     }
 
     override fun launchWithCheckNetworkConnection() =
@@ -140,8 +147,6 @@ internal class GeneralAppFragmentAdmin :
     private fun loadDataForListView()
     {
         this.loadingDialog.startLoadingDialog()
-
-
 
         val completeListData: Deferred<List<DataPointInputEntity>> =
             GlobalScope.async(Dispatchers.IO)
