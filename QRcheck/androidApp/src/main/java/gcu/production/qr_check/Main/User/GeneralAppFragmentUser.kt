@@ -1,6 +1,7 @@
 @file:Suppress("PackageName")
 package gcu.production.qr_check.Main.User
 
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.hideBar
 import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
@@ -41,8 +44,9 @@ internal class GeneralAppFragmentUser
     private var barcodeCompleteInfo: String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View
+        inflater: LayoutInflater
+        , container: ViewGroup?
+        , savedInstanceState: Bundle?): View
     {
         objectsInit()
         launchWithCheckNetworkConnection()
@@ -75,10 +79,17 @@ internal class GeneralAppFragmentUser
                 this.viewBinding.cameraSurfaceView
                 , ::stageFirstUpdateBarcode)
 
-        requireActivity().setBarOptions(
-            R.string.titleFragmentGeneralUser
-            , false
-        )
+        if (requireActivity()
+                .resources
+                .configuration
+                .orientation ==
+            Configuration.ORIENTATION_LANDSCAPE)
+                requireActivity().hideBar()
+        else
+            requireActivity().setBarOptions(
+                R.string.titleFragmentGeneralUser
+                , false
+            )
     }
 
     override fun basicBehavior()
@@ -93,8 +104,19 @@ internal class GeneralAppFragmentUser
             it.startAnimation(this.animSelected)
 
             if (requireActivity().checkPermissions())
+            {
+                viewBinding.cameraSurfaceView.background = null
                 this.barcodeDetectorService
                     .launchBarcodeDetector()
+            }
+        }
+
+        this.viewBinding.btnSettings.setOnClickListener {
+            it.startAnimation(this.animSelected)
+
+            Navigation
+                .findNavController(this.viewBinding.root)
+                .navigate(R.id.actionLaunchSettingsFragment)
         }
     }
 

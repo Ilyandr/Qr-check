@@ -66,7 +66,7 @@
     <string name="titleAlertConfirm">Подтверждение</string>
     <string name="msgAlertExitAccount">Вы точно хотите выйти из своего аккаунта?</string>
     <string name="titleFragmentShowQR">Данные точки</string>
-    <string name="titleFragmentGeneralUser">Сканирование qr-кода</string>
+    <string name="titleFragmentGeneralUser">Сканирование</string>
     <string name="titleSettingsFragment">Настройки</string>
     <string name="alertSettingsChangeLogin">Введите новый номер телефона (без кода страны)</string>
     <string name="alertSettingsChangePassword">Введите новый пароль</string>
@@ -74,4 +74,5 @@
     <string name="alertSettingsDeleteAccount">Введите текущий пароль</string>
     <string name="successChangeDataAccount">Данные аккаунта успешно изменены</string>
     <string name="faultChangeDataAccount">При изменении данных произошла ошибка</string>
+    <string name="infoRemoveAccount">Данный аккаунт был удалён</string>
 </resources>

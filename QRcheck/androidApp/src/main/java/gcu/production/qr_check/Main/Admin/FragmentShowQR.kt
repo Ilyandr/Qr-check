@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import gcu.production.qr_check.Authorization.InvalidDataModel
 import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
@@ -28,7 +29,7 @@ import java.util.concurrent.TimeUnit
 
 @DelicateCoroutinesApi
 internal class FragmentShowQR
-    : Fragment(), GeneralStructure, NetworkActions
+    : Fragment(), GeneralStructure, NetworkActions, InvalidDataModel
 {
     private lateinit var viewBinding: FragmentShowQRBinding
     private lateinit var loadingDialog: CustomLoadingDialog
@@ -105,22 +106,21 @@ internal class FragmentShowQR
 
         GlobalScope.launch(Dispatchers.Main)
         {
-            this@FragmentShowQR
-                .viewBinding
-                .progressLoading
-                .scaleX = 0f
+            generateToken.await()?.let {
+                this@FragmentShowQR
+                    .viewBinding
+                    .progressLoading
+                    .scaleX = 0f
 
-            this@FragmentShowQR
-                .viewBinding
-                .showBarcodeImageView
-                .setImageBitmap(
-                    Pair(1920, 1080) setCardBarcode generateToken.await())
+                this@FragmentShowQR
+                    .viewBinding
+                    .showBarcodeImageView
+                    .setImageBitmap(
+                        Pair(1920, 1080) setCardBarcode it)
 
-            if (generateToken.await() == null)
-                generateBarcodeImage()
-
-            this@FragmentShowQR.viewBinding.statusTextView.text =
-                getString(R.string.infoScanAdminQR)
+                this@FragmentShowQR.viewBinding.statusTextView.text =
+                    getString(R.string.infoScanAdminQR)
+            } ?: (this@FragmentShowQR isDataInvalid requireActivity())
         }
     }
 

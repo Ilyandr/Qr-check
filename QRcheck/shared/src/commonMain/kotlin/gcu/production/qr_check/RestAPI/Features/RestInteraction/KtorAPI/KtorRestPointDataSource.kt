@@ -54,7 +54,7 @@ class KtorRestPointDataSource(
         } catch (ex: Exception) { null }
 
     override suspend fun getAllPoint(
-        userLoginKey: String?): MutableList<DataPointInputEntity> =
+        userLoginKey: String?) =
         try
         {
             Json.decodeFromString(
@@ -69,7 +69,6 @@ class KtorRestPointDataSource(
                             , value = "Basic $userLoginKey")
                     }
                 }.execute()
-                    .readText())
-        } catch (ex: Exception) { emptyList() }
-                as MutableList<DataPointInputEntity>
+                    .readText()) as MutableList<DataPointInputEntity>
+        } catch (ex: Exception) { null }
 }

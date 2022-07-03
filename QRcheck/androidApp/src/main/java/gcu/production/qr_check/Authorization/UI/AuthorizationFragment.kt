@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
@@ -39,6 +40,12 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
 
     override fun objectsInit()
     {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this) {
+                requireActivity().finish()
+            }
+
         this.viewBinding =
             FragmentAuthorizationBinding.inflate(layoutInflater)
 
@@ -87,16 +94,17 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
             sendFirstAuthData.putString(LOGIN_KEY, newCorrectValue[0])
             progressDialog.stopLoadingDialog()
 
-            Navigation
-                .findNavController(viewBinding.root)
-                .navigate(
-                    if (checkExistUserData.await() != null
-                        && checkExistUserData.await()!!)
-                        R.id.actionLaunchConfirmationFragment
-                    else
-                        R.id.actionLaunchRegistrationFragment
-                    , sendFirstAuthData)
-
+            checkExistUserData.await().let {
+                Navigation
+                    .findNavController(viewBinding.root)
+                    .navigate(
+                        if (it != null && it)
+                            R.id.actionLaunchConfirmationFragment
+                        else
+                            R.id.actionLaunchRegistrationFragment
+                        , sendFirstAuthData
+                    )
+            }
 
         }.start()
     }

@@ -33,7 +33,8 @@ class KtorRestRecordDataSource(
         } catch (ex: Exception) { null }
 
     override suspend fun getAllRecord(
-        userAuthKey: String?, pointId: Long): MutableList<UserInputEntity> =
+        userAuthKey: String?, pointId: Long
+    ): MutableList<UserInputEntity>? =
         try
         {
             Json.decodeFromString(
@@ -51,5 +52,5 @@ class KtorRestRecordDataSource(
                 }.execute()
                     .readText())
                 .distinctBy { it.id } as MutableList<UserInputEntity>
-        } catch (ex: Exception) { mutableListOf() }
+        } catch (ex: Exception) { null }
 }

@@ -10,5 +10,5 @@ interface RestRecordDataSource
         , userLocation: Pair<Double, Double>): Long?
 
     suspend fun getAllRecord(
-        userAuthKey: String?, pointId: Long): MutableList<UserInputEntity>
+        userAuthKey: String?, pointId: Long): MutableList<UserInputEntity>?
 }

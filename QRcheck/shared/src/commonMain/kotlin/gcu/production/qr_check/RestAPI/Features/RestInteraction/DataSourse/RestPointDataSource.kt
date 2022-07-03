@@ -14,5 +14,5 @@ interface RestPointDataSource
         userLoginKey: String?, pointID: Long): String?
 
     suspend fun getAllPoint(
-        userLoginKey: String?): MutableList<DataPointInputEntity>
+        userLoginKey: String?): MutableList<DataPointInputEntity>?
 }

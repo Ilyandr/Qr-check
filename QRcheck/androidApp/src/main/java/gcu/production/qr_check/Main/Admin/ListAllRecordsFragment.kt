@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.navigation.Navigation
+import gcu.production.qr_check.Authorization.InvalidDataModel
 import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
@@ -27,7 +28,7 @@ import kotlinx.coroutines.*
 
 @DelicateCoroutinesApi
 internal class ListAllRecordsFragment
-    : Fragment(), GeneralStructure, NetworkActions
+    : Fragment(), GeneralStructure, NetworkActions, InvalidDataModel
 {
     private lateinit var viewBinding: FragmentListAllRecordsBinding
     private lateinit var loadingDialog: CustomLoadingDialog
@@ -90,26 +91,27 @@ internal class ListAllRecordsFragment
     {
         this.loadingDialog.startLoadingDialog()
 
-        val dataInflateForListRecord: Deferred<List<UserInputEntity>> =
+        val dataInflateForListRecord: Deferred<List<UserInputEntity>?> =
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK.restAPI.
                 restRecordRepository
                     .getAllRecord(
                         authAction()
-                        , requireArguments().getLong(DATA_SELECT_KEY))
+                        , requireArguments().getLong(DATA_SELECT_KEY)
+                    )
             }
 
         GlobalScope.launch(Dispatchers.Main)
         {
-            this@ListAllRecordsFragment
-                .viewBinding
-                .listAllRecord
-                .adapter = CustomListViewAdapterRecord(
-                requireContext()
-                , dataInflateForListRecord.await())
-
             loadingDialog.stopLoadingDialog()
+
+            dataInflateForListRecord.await()?.let {
+                this@ListAllRecordsFragment
+                    .viewBinding
+                    .listAllRecord
+                    .adapter = CustomListViewAdapterRecord(requireContext(), it)
+            } ?: (this@ListAllRecordsFragment isDataInvalid requireActivity())
         }
     }
 

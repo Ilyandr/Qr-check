@@ -85,7 +85,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="12sp"
                     android:layout_marginBottom="12sp"
                     android:background="@color/colorGrayAdditional" />

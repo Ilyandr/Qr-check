@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.navigation.Navigation
+import gcu.production.qr_check.Authorization.InvalidDataModel
 import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
@@ -39,7 +40,7 @@ import java.time.LocalDateTime
 
 @DelicateCoroutinesApi
 internal class GeneralAppFragmentAdmin :
-    Fragment(), GeneralStructure, NetworkActions
+    Fragment(), GeneralStructure, NetworkActions, InvalidDataModel
 {
     private lateinit var viewBinding: FragmentGeneralAppAdminBinding
     private lateinit var loadingDialog: CustomLoadingDialog
@@ -155,7 +156,7 @@ internal class GeneralAppFragmentAdmin :
     {
         this.loadingDialog.startLoadingDialog()
 
-        val completeListData: Deferred<List<DataPointInputEntity>> =
+        val completeListData: Deferred<List<DataPointInputEntity>?> =
             GlobalScope.async(Dispatchers.IO)
             {
                 EngineSDK
@@ -173,12 +174,14 @@ internal class GeneralAppFragmentAdmin :
                     .removeAllViews()
             } catch (ex: UnsupportedOperationException) {}
 
-            viewBinding.listAllPoint.adapter =
-                CustomListViewAdapterPoint(
-                    requireContext()
-                    , completeListData.await())
-
             loadingDialog.stopLoadingDialog()
+
+            completeListData.await()?.let {
+                viewBinding.listAllPoint.adapter =
+                    CustomListViewAdapterPoint(
+                        requireContext(), it
+                    )
+            } ?: (this@GeneralAppFragmentAdmin isDataInvalid requireActivity())
         }
     }
 
@@ -286,7 +289,10 @@ internal class GeneralAppFragmentAdmin :
                     R.string.successCreateQR
                 }
                 else
+                {
+                    (this@GeneralAppFragmentAdmin isDataInvalid requireActivity())
                     R.string.faultCreateQR
+                }
                 , Toast.LENGTH_LONG)
                 .show()
         }

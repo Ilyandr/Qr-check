@@ -17,4 +17,9 @@ internal object ActionBarSettings
         this.supportActionBar
             ?.setDisplayHomeAsUpEnabled(backButtonActive)
     }
+
+    fun FragmentActivity.hideBar() =
+        (this as AppCompatActivity)
+            .supportActionBar
+            ?.hide()
 }

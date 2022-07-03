@@ -13,6 +13,7 @@
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:icon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         tools:ignore="DataExtractionRules,MissingApplicationIcon"
         tools:targetApi="s" >
