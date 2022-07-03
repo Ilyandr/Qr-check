@@ -6,7 +6,7 @@
     app:startDestination="@id/launchControllerFragment">
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="gcu.production.qrcheck.android.Authorization.UI.RegistrationFragment"
+        android:name="gcu.production.qr_check.Authorization.UI.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"
-        android:name="gcu.production.qrcheck.android.Authorization.UI.ConfirmationFragment"
+        android:name="gcu.production.qr_check.Authorization.UI.ConfirmationFragment"
         android:label="ConfirmationFragment" >
         <action
             android:id="@+id/actionLaunchGeneralAppFragmentUser"
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment"
+        android:name="gcu.production.qr_check.Authorization.UI.AuthorizationFragment"
         android:label="fragment_authorization"
         tools:layout="@layout/fragment_authorization" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/generalAppFragment"
-        android:name="gcu.production.qrcheck.android.Main.User.GeneralAppFragmentUser"
+        android:name="gcu.production.qr_check.Main.User.GeneralAppFragmentUser"
         android:label="fragment_general_app"
         tools:layout="@layout/fragment_general_app_user" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/launchControllerFragment"
-        android:name="gcu.production.qrcheck.android.Authorization.UI.LaunchControllerFragment"
+        android:name="gcu.production.qr_check.Authorization.UI.LaunchControllerFragment"
         android:label="fragment_launch_controller"
         tools:layout="@layout/fragment_launch_controller" >
         <action
@@ -86,12 +86,12 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentShowQR"
-        android:name="gcu.production.qrcheck.android.Main.Admin.FragmentShowQR"
+        android:name="gcu.production.qr_check.Main.Admin.FragmentShowQR"
         android:label="fragment_show_q_r"
         tools:layout="@layout/fragment_show_q_r" />
     <fragment
         android:id="@+id/listAllRecordsFragment"
-        android:name="gcu.production.qrcheck.android.Main.Admin.ListAllRecordsFragment"
+        android:name="gcu.production.qr_check.Main.Admin.ListAllRecordsFragment"
         android:label="fragment_list_all_records"
         tools:layout="@layout/fragment_list_all_records" >
         <action

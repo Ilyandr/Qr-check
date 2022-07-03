@@ -1,6 +1,10 @@
 <resources>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="actionBarTheme">@style/ActionBar</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
+    <style name="ActionBar" parent="Theme.AppCompat.Light">
+        <item name="android:fontFamily">@font/bandera_middle_font</item>
+    </style>
 </resources>

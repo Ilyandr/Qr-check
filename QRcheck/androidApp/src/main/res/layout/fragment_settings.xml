@@ -30,8 +30,9 @@
             android:text="@string/infoNameFragmentGeneralAdmin"/>
     </LinearLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/inflate"
+        android:theme="@android:style/Theme.Black"
         android:layout_width="match_parent"
         android:background="@color/colorTransparent"
         android:layout_height="match_parent"

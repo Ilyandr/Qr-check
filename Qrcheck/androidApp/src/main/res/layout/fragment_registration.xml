@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,168 +9,195 @@
     tools:context="gcu.production.qr_check.BasicActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragmentInfo"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
         android:gravity="center|bottom"
         android:text="@string/textRegisterLayout"
-        android:layout_height="0dp"
-        android:textSize="18sp"
         android:textColor="@color/colorBlack"
+        android:textSize="18sp"
         app:fontFamily="@font/bandera_small_font"
-        android:layout_weight="1"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label"
         android:layout_width="match_parent"
-        android:text="@string/infoOutputRegister"
         android:layout_height="0dp"
-        android:textSize="15sp"
-        android:textColor="@color/colorGray"
-        android:gravity="center|top"
         android:paddingTop="8sp"
-        android:layout_marginEnd="32sp"
-        android:layout_marginStart="32sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         android:fontFamily="@font/bandera_middle_font"
-        android:layout_weight="1"/>
+        android:gravity="center|top"
+        android:text="@string/infoOutputRegister"
+        android:textColor="@color/colorGray"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragmentInfo" />
 
-    <View
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.5"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNextStage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:background="@drawable/edit_text_form"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnNextStage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/registerRoleInfo"
-            android:hint="@string/textHintTypeAccountRegister"
-            android:textSize="16sp"
-            android:clickable="false"
-            android:gravity="center|left"
-            android:paddingStart="12sp"
-            android:textColor="@color/colorGray"
-            android:layout_weight="2"
-            android:inputType="number"
-            android:fontFamily="@font/bandera_small_font"
-            android:background="@color/colorTransparent"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/edit_text_form"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12sp"
-            android:layout_marginBottom="12sp"
-            android:background="@color/colorGrayAdditional"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/registerRoleInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/colorTransparent"
+                    android:clickable="false"
+                    android:fontFamily="@font/bandera_small_font"
+                    android:gravity="center|left"
+                    android:hint="@string/textHintTypeAccountRegister"
+                    android:inputType="number"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/colorGray"
+                    android:textSize="16sp"
+                    tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnSelectRole"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_margin="6sp"
-            android:src="@drawable/expand_more_24"
-            android:textColor="@color/colorBlack"
-            android:background="@color/colorTransparent"
-            tools:ignore="NestedWeights" />
-    </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12sp"
+                    android:layout_marginBottom="12sp"
+                    android:background="@color/colorGrayAdditional" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/inputName"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left|center"
-        android:paddingStart="12sp"
-        android:layout_marginTop="6sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:hint="@string/nameInfoRegister"
-        android:textSize="16sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:maxLength="80"
-        android:maxLines="1"
-        android:background="@drawable/edit_text_form"
-        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnSelectRole"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6sp"
+                    android:layout_weight="1"
+                    android:background="@color/colorTransparent"
+                    android:gravity="center"
+                    android:src="@drawable/expand_more_24"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="NestedWeights" />
+            </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/inputJobTitle"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left|center"
-        android:paddingStart="12sp"
-        android:layout_marginTop="6sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:hint="@string/jobTitleInfoRegister"
-        android:textSize="16sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:maxLength="60"
-        android:maxLines="1"
-        android:background="@drawable/edit_text_form"
-        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inputName"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="6sp"
+                android:layout_marginEnd="32sp"
+                android:background="@drawable/edit_text_form"
+                android:fontFamily="@font/bandera_small_font"
+                android:gravity="left|center"
+                android:hint="@string/nameInfoRegister"
+                android:maxLength="80"
+                android:maxLines="1"
+                android:paddingStart="12sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+                tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/inputOrganization"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left|center"
-        android:paddingStart="12sp"
-        android:layout_marginTop="6sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:hint="@string/organizationInfoRegister"
-        android:textSize="16sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:maxLength="60"
-        android:maxLines="1"
-        android:background="@drawable/edit_text_form"
-        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inputJobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="6sp"
+                android:layout_marginEnd="32sp"
+                android:background="@drawable/edit_text_form"
+                android:fontFamily="@font/bandera_small_font"
+                android:gravity="left|center"
+                android:hint="@string/jobTitleInfoRegister"
+                android:maxLength="60"
+                android:maxLines="1"
+                android:paddingStart="12sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputName"
+                tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/inputPassword"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left|center"
-        android:inputType="textPassword"
-        android:paddingStart="12sp"
-        android:layout_marginTop="6sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:hint="@string/passwordInfoRegister"
-        android:textSize="16sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:maxLength="40"
-        android:maxLines="1"
-        android:background="@drawable/edit_text_form"
-        tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inputOrganization"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="6sp"
+                android:layout_marginEnd="32sp"
+                android:background="@drawable/edit_text_form"
+                android:fontFamily="@font/bandera_small_font"
+                android:gravity="left|center"
+                android:hint="@string/organizationInfoRegister"
+                android:maxLength="60"
+                android:maxLines="1"
+                android:paddingStart="12sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputJobTitle"
+                tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inputPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="6sp"
+                android:layout_marginEnd="32sp"
+                android:background="@drawable/edit_text_form"
+                android:fontFamily="@font/bandera_small_font"
+                android:gravity="left|center"
+                android:hint="@string/passwordInfoRegister"
+                android:inputType="textPassword"
+                android:maxLength="40"
+                android:maxLines="1"
+                android:paddingStart="12sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputOrganization"
+                tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNextStage"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="12sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:textColorHint="@color/colorWhite"
-        android:hint="@string/btnTextRegisterChangeStage"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/general_complete_btn_form"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:fontFamily="@font/bandera_small_font"
+        android:hint="@string/btnTextRegisterChangeStage"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

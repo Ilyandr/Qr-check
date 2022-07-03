@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Main.Admin
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Main.Admin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.navigation.Navigation
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
@@ -50,6 +52,11 @@ internal class ListAllRecordsFragment
 
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
+
+        requireActivity().setBarOptions(
+            R.string.infoNameFragmentAllRecords
+            , true
+        )
     }
 
     override fun basicBehavior()

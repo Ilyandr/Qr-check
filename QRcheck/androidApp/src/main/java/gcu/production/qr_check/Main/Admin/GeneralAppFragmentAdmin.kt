@@ -1,3 +1,4 @@
+@file:Suppress("PackageName")
 package gcu.production.qr_check.Main.Admin
 
 import android.annotation.SuppressLint
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.navigation.Navigation
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
@@ -77,6 +79,11 @@ internal class GeneralAppFragmentAdmin :
             AnimationUtils.loadAnimation(
                 requireContext()
                 , R.anim.select_object)
+
+        requireActivity().setBarOptions(
+            R.string.infoNameFragmentGeneralAdmin
+            , false
+        )
     }
 
     override fun basicBehavior()

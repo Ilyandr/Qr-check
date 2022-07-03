@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Authorization.UI
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Authorization.UI
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,7 +19,8 @@ import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qr_check.Service.DataStorageService
 import gcu.production.qr_check.Service.DataStorageService.Companion.LOGIN_ID
 import gcu.production.qr_check.Service.DataStorageService.Companion.PASSWORD_ID
-import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
+import gcu.production.qr_check.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qrcheck.android.GeneralAppUI.PopupMenuCreator
 import gcu.production.qr_check.android.R
@@ -47,12 +49,17 @@ internal class RegistrationFragment : Fragment(), GeneralStructure
     {
         this.viewBinding =
             FragmentRegistrationBinding.inflate(layoutInflater)
+
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
+
         this.animSelected =
             AnimationUtils.loadAnimation(
                 requireContext()
                 , R.anim.select_object)
+
+        requireActivity()
+            .setBarOptions(backButtonActive = true)
     }
 
     override fun basicBehavior()

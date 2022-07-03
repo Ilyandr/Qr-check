@@ -7,25 +7,6 @@
     android:orientation="vertical"
     tools:context="gcu.production.qr_check.BasicActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="top"
-        android:background="@color/colorGrayBar"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="19sp"
-            android:fontFamily="@font/bandera_middle_font"
-            android:textColor="@color/colorGeneralThemeApp"
-            android:text="@string/infoNameFragmentAllRecords"/>
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/t"
         android:layout_width="match_parent"

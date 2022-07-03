@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Authorization.UI
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Authorization.UI
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.android.R
 import gcu.production.qr_check.android.databinding.FragmentAuthorizationBinding
 import gcu.production.qrcheck.AppEngine.EngineSDK
@@ -39,12 +41,17 @@ internal class AuthorizationFragment : Fragment(), GeneralStructure
     {
         this.viewBinding =
             FragmentAuthorizationBinding.inflate(layoutInflater)
+
         this.progressDialog =
             CustomLoadingDialog(requireActivity())
+
         this.animSelected =
             AnimationUtils.loadAnimation(
                 requireContext()
                 , R.anim.select_object)
+
+        requireActivity()
+            .setBarOptions(backButtonActive = false)
     }
 
     override fun basicBehavior()

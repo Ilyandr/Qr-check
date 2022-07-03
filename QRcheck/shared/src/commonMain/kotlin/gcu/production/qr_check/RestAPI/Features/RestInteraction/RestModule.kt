@@ -1,5 +1,7 @@
 package gcu.production.qrcheck.RestAPI.Features.RestInteraction
 
+import gcu.production.qr_check.RestAPI.Features.RestInteraction.KtorAPI.KtorRestAccountDataSource
+import gcu.production.qr_check.RestAPI.Features.RestInteraction.Repository.RestAccountRepository
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.DataSourse.RestAuthDataSource
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.DataSourse.RestPointDataSource
@@ -23,32 +25,50 @@ internal val restModule =
         , init = {
             bind<RestAuthDataSource>() with singleton {
                 KtorRestAuthDataSource(
-                    httpClient = instance())
+                    httpClient = instance()
+                )
             }
             bind<RestAuthRepository>() with singleton {
                 RestAuthRepository(
-                    restAuthDataSource = instance())
+                    restAuthDataSource = instance()
+                )
             }
 
             bind<RestPointDataSource>() with singleton {
                 KtorRestPointDataSource(
-                    httpClient = instance())
+                    httpClient = instance()
+                )
             }
 
             bind<RestPointRepository>() with singleton {
                 RestPointRepository(
-                    restPointDataSource = instance())
+                    restPointDataSource = instance()
+                )
             }
 
 
             bind<KtorRestRecordDataSource>() with singleton {
                 KtorRestRecordDataSource(
-                    httpClient = instance())
+                    httpClient = instance()
+                )
             }
 
             bind<RestRecordRepository>() with singleton {
                 RestRecordRepository(
-                    restRecordDataSource = instance())
+                    restRecordDataSource = instance()
+                )
+            }
+
+            bind<KtorRestAccountDataSource>() with singleton {
+                KtorRestAccountDataSource(
+                    httpClient = instance()
+                )
+            }
+
+            bind<RestAccountRepository>() with singleton {
+                RestAccountRepository(
+                    restAccountDataSource = instance()
+                )
             }
         })
 
@@ -62,6 +82,9 @@ object RestModule
         get() = EngineSDK.di.instance()
 
     val restRecordRepository: RestRecordRepository
+        get() = EngineSDK.di.instance()
+
+    val restAccountRepository: RestAccountRepository
         get() = EngineSDK.di.instance()
 }
 

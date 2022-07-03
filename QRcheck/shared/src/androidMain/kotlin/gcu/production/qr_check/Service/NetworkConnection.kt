@@ -1,3 +1,4 @@
+@file:Suppress("PackageName")
 package gcu.production.qr_check.Service
 
 import gcu.production.qrcheck.StructureApp.NetworkActions

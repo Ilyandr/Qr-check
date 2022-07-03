@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Main.User
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Main.User
 
 import android.location.Location
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
@@ -72,6 +74,11 @@ internal class GeneralAppFragmentUser
             BarcodeDetectorService(
                 this.viewBinding.cameraSurfaceView
                 , ::stageFirstUpdateBarcode)
+
+        requireActivity().setBarOptions(
+            R.string.titleFragmentGeneralUser
+            , false
+        )
     }
 
     override fun basicBehavior()

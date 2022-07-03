@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Authorization.UI
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Authorization.UI
 
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +18,8 @@ import gcu.production.qrcheck.RestAPI.Models.User.UserInputEntity
 import gcu.production.qrcheck.Service.DataCorrectness
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qr_check.Service.DataStorageService
-import gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
+import gcu.production.qr_check.Authorization.UI.AuthorizationFragment.Companion.LOGIN_KEY
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qrcheck.android.GeneralAppUI.CustomLoadingDialog
 import gcu.production.qr_check.android.R
 import kotlinx.coroutines.*
@@ -45,12 +47,17 @@ internal class ConfirmationFragment : Fragment(), GeneralStructure
     {
         this.viewBinding =
             FragmentConfirmationBinding.inflate(layoutInflater)
+
         this.loadingDialog =
             CustomLoadingDialog(requireActivity())
+
         this.animSelected =
             AnimationUtils.loadAnimation(
                 requireContext()
                 , R.anim.select_object)
+
+        requireActivity()
+            .setBarOptions(backButtonActive = true)
     }
 
     override fun basicBehavior()

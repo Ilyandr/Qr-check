@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Main.Admin
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Main.Admin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.Service.Base64.Base64Factory
 import gcu.production.qrcheck.AppEngine.EngineSDK
 import gcu.production.qrcheck.RestAPI.Features.RestInteraction.restAPI
@@ -57,6 +59,11 @@ internal class FragmentShowQR
             AnimationUtils.loadAnimation(
                 requireContext()
                 , R.anim.select_object)
+
+        requireActivity().setBarOptions(
+            R.string.titleFragmentShowQR
+            , true
+        )
     }
 
     override fun basicBehavior()
@@ -80,11 +87,6 @@ internal class FragmentShowQR
                 , 1
                 , TimeUnit.MINUTES
             )
-
-        this.viewBinding.btnBack.setOnClickListener {
-            it.startAnimation(this.basicAnimation)
-            requireActivity().onBackPressed()
-        }
     }
 
     private fun generateBarcodeImage()

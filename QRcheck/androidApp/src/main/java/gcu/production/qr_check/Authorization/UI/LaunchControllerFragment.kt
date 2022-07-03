@@ -1,4 +1,5 @@
-package gcu.production.qrcheck.android.Authorization.UI
+@file:Suppress("PackageName")
+package gcu.production.qr_check.Authorization.UI
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import gcu.production.qr_check.GeneralAppUI.ActionBarSettings.setBarOptions
 import gcu.production.qr_check.android.databinding.FragmentLaunchControllerBinding
 import gcu.production.qrcheck.StructureApp.GeneralStructure
 import gcu.production.qr_check.Service.DataStorageService
@@ -35,6 +37,9 @@ internal class LaunchControllerFragment : Fragment(), GeneralStructure
     {
         this.bindingView =
             FragmentLaunchControllerBinding.inflate(layoutInflater)
+
+        requireActivity()
+            .setBarOptions(backButtonActive = true)
     }
 
     override fun basicBehavior()

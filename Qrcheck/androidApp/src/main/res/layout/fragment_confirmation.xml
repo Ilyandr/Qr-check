@@ -1,82 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="gcu.production.qrcheck.android.Authorization.UI.AuthorizationFragment">
+    tools:context="gcu.production.qr_check.Authorization.UI.AuthorizationFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragmentInfo"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
         android:gravity="center|bottom"
         android:text="@string/infoTextConfirmAuth"
-        android:layout_height="0dp"
-        android:textSize="18sp"
         android:textColor="@color/colorBlack"
+        android:textSize="18sp"
         app:fontFamily="@font/bandera_small_font"
-        android:layout_weight="1"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label"
         android:layout_width="match_parent"
-        android:text="@string/infoTextConfirmAction"
         android:layout_height="0dp"
-        android:textSize="15sp"
-        android:textColor="@color/colorGray"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/bandera_middle_font"
         android:gravity="center|top"
         android:paddingTop="8sp"
-        android:layout_marginEnd="32sp"
-        android:layout_marginStart="32sp"
-        android:fontFamily="@font/bandera_middle_font"
-        android:layout_weight="1"/>
+        android:text="@string/infoTextConfirmAction"
+        android:textColor="@color/colorGray"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragmentInfo" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/inputPassword"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left|center"
-        android:paddingStart="12sp"
-        android:inputType="textPassword"
-        android:hint="@string/textPasswordEditTextInfo"
-        android:textSize="16sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginTop="12sp"
-        android:layout_marginBottom="12sp"
-        android:layout_marginEnd="32sp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edit_text_form"
         android:fontFamily="@font/bandera_small_font"
+        android:gravity="left|center"
+        android:hint="@string/textPasswordEditTextInfo"
+        android:inputType="textPassword"
         android:maxLength="40"
         android:maxLines="1"
-        android:background="@drawable/edit_text_form"
+        android:paddingStart="12sp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label"
         tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginEnd="32sp"
-        android:layout_marginStart="32sp"
-        android:fontFamily="@font/bandera_small_font"
         android:background="@color/colorTransparent"
+        android:fontFamily="@font/bandera_small_font"
+        android:gravity="center"
         android:hint="@string/textBtnResetConfirmCode"
         android:textColorHint="@color/colorGray"
-        android:gravity="center|top"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNextStage"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="12sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginEnd="32sp"
-        android:fontFamily="@font/bandera_small_font"
-        android:textColorHint="@color/colorWhite"
-        android:hint="@string/infoBtnConfirmCode"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/general_complete_btn_form"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:fontFamily="@font/bandera_small_font"
+        android:hint="@string/infoBtnConfirmCode"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
