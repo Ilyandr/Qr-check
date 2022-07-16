@@ -75,4 +75,5 @@
     <string name="successChangeDataAccount">Данные аккаунта успешно изменены</string>
     <string name="faultChangeDataAccount">При изменении данных произошла ошибка</string>
     <string name="infoRemoveAccount">Данный аккаунт был удалён</string>
+    <string name="errorCreatePoint">При создании новой точки произошла ошибка, поворите попытку заного</string>
 </resources>

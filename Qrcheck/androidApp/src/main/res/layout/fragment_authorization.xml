@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="gcu.production.qr_check.Authorization.UI.AuthorizationFragment">
+    tools:context="gcu.production.qr_check.Presentation.Main.Common.Authorization.AuthorizationFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragmentInfo"

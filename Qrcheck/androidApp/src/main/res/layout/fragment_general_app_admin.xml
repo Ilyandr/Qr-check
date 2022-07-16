@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="gcu.production.qr_check.BasicActivity">
+    tools:context="gcu.production.qr_check.Presentation.Main.Common.BasicActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/t"
@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listAllPoint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -5,26 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="gcu.production.qr_check.BasicActivity">
+    tools:context="gcu.production.qr_check.Presentation.Main.Common.BasicActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/t"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listAllRecord"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-
-        <ListView
-            android:id="@+id/listAllRecord"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/bar_icon"

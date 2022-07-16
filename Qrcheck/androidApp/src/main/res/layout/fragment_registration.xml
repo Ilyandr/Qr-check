@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/fragmentRegistration"
-    tools:context="gcu.production.qr_check.BasicActivity">
+    tools:context="gcu.production.qr_check.Presentation.Main.Common.BasicActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragmentInfo"
